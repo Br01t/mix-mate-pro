@@ -1,0 +1,15 @@
+{
+  "name": "MixCore",
+  "short_name": "MixCore",
+  "description": "Patented industrial mixing technology",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "theme_color": "#0F172A",
+  "background_color": "#0F172A",
+  "display": "standalone"
+}
