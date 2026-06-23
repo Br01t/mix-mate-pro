@@ -1,4 +1,3 @@
-
 # MixCore — B2B Industrial Mixer Website
 
 A clean, corporate, CRO-optimized site with an interactive machine configurator. Palette: dark slate `#0F172A`, industrial teal `#14B8A6` / blue `#0EA5E9`, white, with subtle steel grays. Frontend-only (no backend) — quote submissions show a success state and log to console; we can wire to Lovable Cloud later if you want persistence + email.

@@ -21,7 +21,9 @@ export function Header() {
           <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
             <Atom className="h-4 w-4" />
           </span>
-          <span className="text-lg">MixCore<span className="text-primary">.</span></span>
+          <span className="text-lg">
+            MixCore<span className="text-primary">.</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -46,33 +48,31 @@ export function Header() {
           </Button>
         </div>
 
-        <button
-          aria-label="Toggle menu"
-          className="md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
+        <button aria-label="Toggle menu" className="md:hidden" onClick={() => setOpen((v) => !v)}>
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
-          <div className="space-y-1 px-4 py-3">
+        <div className="border-t border-border bg-background md:hidden animate-in slide-in-from-top-4 duration-200 ease-out shadow-lg">
+          <div className="space-y-1.5 px-4 py-4">
             {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted"
+                className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
               >
                 {item.label}
               </Link>
             ))}
-            <div className="px-3 py-2">
+            <div className="border-t border-border my-2 pt-3 px-3">
               <LangSwitch lang={lang} setLang={setLang} />
             </div>
-            <Button asChild className="mt-2 w-full">
-              <Link to="/configurator" onClick={() => setOpen(false)}>{t("common.requestQuote")}</Link>
+            <Button asChild className="mt-2 w-full py-5">
+              <Link to="/configurator" onClick={() => setOpen(false)}>
+                {t("common.requestQuote")}
+              </Link>
             </Button>
           </div>
         </div>

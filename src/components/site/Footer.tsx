@@ -20,9 +20,21 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-semibold">{t("footer.product")}</h4>
           <ul className="mt-4 space-y-2 text-sm text-surface-foreground/70">
-            <li><Link to="/technology" className="hover:text-surface-foreground">{t("nav.technology")}</Link></li>
-            <li><Link to="/configurator" className="hover:text-surface-foreground">{t("nav.configurator")}</Link></li>
-            <li><Link to="/configurator" className="hover:text-surface-foreground">{t("common.requestQuote")}</Link></li>
+            <li>
+              <Link to="/technology" className="hover:text-surface-foreground">
+                {t("nav.technology")}
+              </Link>
+            </li>
+            <li>
+              <Link to="/configurator" className="hover:text-surface-foreground">
+                {t("nav.configurator")}
+              </Link>
+            </li>
+            <li>
+              <Link to="/configurator" className="hover:text-surface-foreground">
+                {t("common.requestQuote")}
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -39,16 +51,24 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-semibold">{t("footer.contact")}</h4>
           <ul className="mt-4 space-y-3 text-sm text-surface-foreground/70">
-            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4" /> Via dell'Industria 14, 20010 Milano, Italia</li>
-            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4" /> +39 02 0000 0000</li>
-            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4" /> sales@mixcore.industrial</li>
+            <li className="flex items-start gap-2">
+              <MapPin className="mt-0.5 h-4 w-4" /> Via dell'Industria 14, 20010 Milano, Italia
+            </li>
+            <li className="flex items-start gap-2">
+              <Phone className="mt-0.5 h-4 w-4" /> +39 02 0000 0000
+            </li>
+            <li className="flex items-start gap-2">
+              <Mail className="mt-0.5 h-4 w-4" /> sales@mixcore.industrial
+            </li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-surface-foreground/10">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-4 py-5 text-xs text-surface-foreground/60 sm:flex-row sm:items-center sm:px-6 lg:px-8">
-          <p>© {new Date().getFullYear()} MixCore S.p.A. — {t("footer.rights")} Patent EP3 482 109.</p>
+          <p>
+            © {new Date().getFullYear()} MixCore S.p.A. — {t("footer.rights")} Patent EP3 482 109.
+          </p>
           <p>{t("footer.legal")}</p>
         </div>
       </div>

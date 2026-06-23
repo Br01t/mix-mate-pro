@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { z } from "zod";
-import { CheckCircle2, Loader2 } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { CheckCircle2, Loader2, FileDown } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +17,7 @@ import type { Model } from "@/data/models";
 import type { Optional } from "@/data/optionals";
 import { formatEUR } from "@/lib/format";
 import { useI18n } from "@/i18n/I18nProvider";
+import { generateQuotePDF } from "@/lib/pdfGenerator";
 
 export function QuoteDialog({
   open,
@@ -38,13 +45,20 @@ export function QuoteDialog({
   });
   type FormValues = z.infer<typeof schema>;
 
-  const [values, setValues] = useState<FormValues>({ name: "", company: "", email: "", phone: "", notes: "" });
+  const [values, setValues] = useState<FormValues>({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    notes: "",
+  });
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState<null | { ref: string }>(null);
 
-  const update = (k: keyof FormValues) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setValues((v) => ({ ...v, [k]: e.target.value }));
+  const update =
+    (k: keyof FormValues) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setValues((v) => ({ ...v, [k]: e.target.value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +77,11 @@ export function QuoteDialog({
     await new Promise((r) => setTimeout(r, 800));
     const ref = "MX-" + Math.random().toString(36).slice(2, 8).toUpperCase();
     // eslint-disable-next-line no-console
-    console.log("Quote request submitted", { ref, contact: parsed.data, configuration: { model, chosenOptionals, total } });
+    console.log("Quote request submitted", {
+      ref,
+      contact: parsed.data,
+      configuration: { model, chosenOptionals, total },
+    });
     setSubmitting(false);
     setSubmitted({ ref });
   };
@@ -87,13 +105,49 @@ export function QuoteDialog({
             <h3 className="mt-4 text-xl font-semibold">{t("quote.received")}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{t("quote.receivedBody")}</p>
             <div className="mx-auto mt-5 max-w-sm rounded-lg border bg-muted/40 p-4 text-left text-sm">
-              <div className="flex justify-between"><span className="text-muted-foreground">{t("quote.reference")}</span><span className="font-mono font-semibold">{submitted.ref}</span></div>
-              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">{t("quote.model")}</span><span className="font-medium">{model.name}</span></div>
-              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">{t("quote.options")}</span><span className="font-medium">{chosenOptionals.length}</span></div>
-              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">{t("quote.total")}</span><span className="font-semibold">{formatEUR(total, lang)}</span></div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">{t("quote.reference")}</span>
+                <span className="font-mono font-semibold">{submitted.ref}</span>
+              </div>
+              <div className="mt-1 flex justify-between">
+                <span className="text-muted-foreground">{t("quote.model")}</span>
+                <span className="font-medium">{model.name}</span>
+              </div>
+              <div className="mt-1 flex justify-between">
+                <span className="text-muted-foreground">{t("quote.options")}</span>
+                <span className="font-medium">{chosenOptionals.length}</span>
+              </div>
+              <div className="mt-1 flex justify-between">
+                <span className="text-muted-foreground">{t("quote.total")}</span>
+                <span className="font-semibold">{formatEUR(total, lang)}</span>
+              </div>
             </div>
-            <div className="mt-6 flex justify-center gap-2">
-              <Button variant="outline" onClick={() => handleClose(false)}>{t("common.close")}</Button>
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              <Button variant="outline" onClick={() => handleClose(false)}>
+                {t("common.close")}
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  generateQuotePDF({
+                    ref: submitted.ref,
+                    contact: {
+                      name: values.name,
+                      company: values.company,
+                      email: values.email,
+                      phone: values.phone,
+                      notes: values.notes,
+                    },
+                    model,
+                    chosenOptionals,
+                    total,
+                    lang,
+                  });
+                }}
+              >
+                <FileDown className="mr-1.5 h-4 w-4" />
+                {lang === "it" ? "Scarica PDF" : "Download PDF"}
+              </Button>
               <Button
                 onClick={() => {
                   onResetConfig();
@@ -115,7 +169,9 @@ export function QuoteDialog({
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-semibold">{model.name}</p>
-                  <p className="text-xs text-muted-foreground">{pick(model.tagline)} · {model.capacity}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {pick(model.tagline)} · {model.capacity}
+                  </p>
                 </div>
                 <p className="text-lg font-semibold tabular-nums">{formatEUR(total, lang)}</p>
               </div>
@@ -135,16 +191,53 @@ export function QuoteDialog({
             </div>
 
             <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
-              <Field id="name" label={t("quote.fullName")} value={values.name} onChange={update("name")} error={errors.name} />
-              <Field id="company" label={t("quote.company")} value={values.company} onChange={update("company")} error={errors.company} />
-              <Field id="email" type="email" label={t("quote.email")} value={values.email} onChange={update("email")} error={errors.email} />
-              <Field id="phone" label={t("quote.phone")} value={values.phone} onChange={update("phone")} error={errors.phone} />
+              <Field
+                id="name"
+                label={t("quote.fullName")}
+                value={values.name}
+                onChange={update("name")}
+                error={errors.name}
+              />
+              <Field
+                id="company"
+                label={t("quote.company")}
+                value={values.company}
+                onChange={update("company")}
+                error={errors.company}
+              />
+              <Field
+                id="email"
+                type="email"
+                label={t("quote.email")}
+                value={values.email}
+                onChange={update("email")}
+                error={errors.email}
+              />
+              <Field
+                id="phone"
+                label={t("quote.phone")}
+                value={values.phone}
+                onChange={update("phone")}
+                error={errors.phone}
+              />
               <div className="sm:col-span-2">
-                <Label htmlFor="notes">{t("quote.notes")} <span className="text-muted-foreground">({t("common.optional")})</span></Label>
-                <Textarea id="notes" rows={3} value={values.notes} onChange={update("notes")} className="mt-1.5" placeholder={t("quote.notesPh")} />
+                <Label htmlFor="notes">
+                  {t("quote.notes")}{" "}
+                  <span className="text-muted-foreground">({t("common.optional")})</span>
+                </Label>
+                <Textarea
+                  id="notes"
+                  rows={3}
+                  value={values.notes}
+                  onChange={update("notes")}
+                  className="mt-1.5"
+                  placeholder={t("quote.notesPh")}
+                />
               </div>
               <div className="sm:col-span-2 flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={() => handleClose(false)}>{t("common.cancel")}</Button>
+                <Button type="button" variant="outline" onClick={() => handleClose(false)}>
+                  {t("common.cancel")}
+                </Button>
                 <Button type="submit" disabled={submitting}>
                   {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {t("common.submit")}
@@ -159,7 +252,12 @@ export function QuoteDialog({
 }
 
 function Field({
-  id, label, value, onChange, error, type = "text",
+  id,
+  label,
+  value,
+  onChange,
+  error,
+  type = "text",
 }: {
   id: string;
   label: string;
@@ -171,7 +269,14 @@ function Field({
   return (
     <div>
       <Label htmlFor={id}>{label}</Label>
-      <Input id={id} type={type} value={value} onChange={onChange} className="mt-1.5" aria-invalid={!!error} />
+      <Input
+        id={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        className="mt-1.5"
+        aria-invalid={!!error}
+      />
       {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
     </div>
   );

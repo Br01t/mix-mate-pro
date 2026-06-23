@@ -38,9 +38,13 @@ export function SummaryPanel({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-4 text-surface-foreground">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">{t(`categories.${model.category}`)}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
+              {t(`categories.${model.category}`)}
+            </p>
             <h3 className="mt-0.5 text-lg font-semibold">{model.name}</h3>
-            <p className="text-xs text-surface-foreground/70">{pick(model.tagline)} · {model.capacity}</p>
+            <p className="text-xs text-surface-foreground/70">
+              {pick(model.tagline)} · {model.capacity}
+            </p>
           </div>
         </div>
 
@@ -66,7 +70,10 @@ export function SummaryPanel({
               <Separator className="my-3" />
               <ul className="space-y-2">
                 {chosenOptionals.map((o) => (
-                  <li key={o.id} className="flex items-center justify-between gap-2 text-sm animate-in fade-in slide-in-from-right-2 duration-300">
+                  <li
+                    key={o.id}
+                    className="flex items-center justify-between gap-2 text-sm animate-in fade-in slide-in-from-right-2 duration-300"
+                  >
                     <button
                       onClick={() => onRemoveOptional(o.id)}
                       className="group flex min-w-0 items-center gap-1.5 text-left text-muted-foreground transition-colors hover:text-destructive"
@@ -75,7 +82,9 @@ export function SummaryPanel({
                       <X className="h-3.5 w-3.5 shrink-0 opacity-50 transition-opacity group-hover:opacity-100" />
                       <span className="truncate">{pick(o.name)}</span>
                     </button>
-                    <span className="shrink-0 font-medium tabular-nums">+{formatEUR(o.price, lang)}</span>
+                    <span className="shrink-0 font-medium tabular-nums">
+                      +{formatEUR(o.price, lang)}
+                    </span>
                   </li>
                 ))}
               </ul>

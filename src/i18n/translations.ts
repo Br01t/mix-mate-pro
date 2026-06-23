@@ -35,7 +35,10 @@ export const dict = {
     legal: { it: "Privacy · Termini · Cookie", en: "Privacy · Terms · Cookies" },
   },
   home: {
-    badge: { it: "Brevetto EP3 482 109 — Miscelazione twin-rotor", en: "Patent EP3 482 109 — Twin-rotor mixing" },
+    badge: {
+      it: "Brevetto EP3 482 109 — Miscelazione twin-rotor",
+      en: "Patent EP3 482 109 — Twin-rotor mixing",
+    },
     h1a: { it: "Miscelazione industriale,", en: "Industrial mixing," },
     h1b: { it: "ingegnerizzata al micron.", en: "engineered to the micron." },
     intro: {
@@ -47,28 +50,52 @@ export const dict = {
     statEng: { it: "Ingegneria", en: "Engineering" },
     statEngVal: { it: "18 anni", en: "18 yr" },
     whyKicker: { it: "Perché MixCore", en: "Why MixCore" },
-    whyTitle: { it: "Un nuovo standard per la miscelazione industriale.", en: "A new standard for industrial mixing." },
+    whyTitle: {
+      it: "Un nuovo standard per la miscelazione industriale.",
+      en: "A new standard for industrial mixing.",
+    },
     whyIntro: {
       it: "Costruito attorno a un'unica innovazione brevettata, ogni unità MixCore alza portata, precisione e continuità in un solo pacchetto ingegnerizzato.",
       en: "Built around a single patented innovation, every MixCore unit raises throughput, precision and uptime in one engineered package.",
     },
     benefit1Title: { it: "+38% di portata", en: "+38% throughput" },
-    benefit1Desc: { it: "La geometria twin-rotor brevettata garantisce tassi di miscelazione superiori a minor consumo energetico.", en: "Patented twin-rotor geometry delivers higher mixing rates at lower energy." },
+    benefit1Desc: {
+      it: "La geometria twin-rotor brevettata garantisce tassi di miscelazione superiori a minor consumo energetico.",
+      en: "Patented twin-rotor geometry delivers higher mixing rates at lower energy.",
+    },
     benefit2Title: { it: "Precisione sub-micron", en: "Sub-micron precision" },
-    benefit2Desc: { it: "Omogeneizzazione fino a 0,8 µm per riproducibilità di livello farmaceutico.", en: "Homogenization down to 0.8 µm for pharma-grade reproducibility." },
+    benefit2Desc: {
+      it: "Omogeneizzazione fino a 0,8 µm per riproducibilità di livello farmaceutico.",
+      en: "Homogenization down to 0.8 µm for pharma-grade reproducibility.",
+    },
     benefit3Title: { it: "Sicurezza certificata", en: "Certified safety" },
-    benefit3Desc: { it: "Conformità ATEX, CE, FDA e 3-A sanitary su tutta la gamma.", en: "ATEX, CE, FDA & 3-A sanitary compliance across the product line." },
+    benefit3Desc: {
+      it: "Conformità ATEX, CE, FDA e 3-A sanitary su tutta la gamma.",
+      en: "ATEX, CE, FDA & 3-A sanitary compliance across the product line.",
+    },
     benefit4Title: { it: "Controllo intelligente", en: "Smart control" },
-    benefit4Desc: { it: "PLC IoT-ready con gestione ricette e manutenzione predittiva.", en: "IoT-ready PLC with recipe management and predictive maintenance." },
+    benefit4Desc: {
+      it: "PLC IoT-ready con gestione ricette e manutenzione predittiva.",
+      en: "IoT-ready PLC with recipe management and predictive maintenance.",
+    },
     howKicker: { it: "Come funziona", en: "How it works" },
     howTitle: { it: "Tre fasi ingegnerizzate.", en: "Three engineered stages." },
     fullBreakdown: { it: "Approfondimento tecnico completo", en: "Full technical breakdown" },
     step1Title: { it: "Iniezione in controcorrente", en: "Counter-flow injection" },
-    step1Desc: { it: "Le sostanze entrano da bocchette opposte, pre-condizionate per taglio e temperatura.", en: "Substances enter through opposing inlets, pre-conditioned for shear and temperature." },
+    step1Desc: {
+      it: "Le sostanze entrano da bocchette opposte, pre-condizionate per taglio e temperatura.",
+      en: "Substances enter through opposing inlets, pre-conditioned for shear and temperature.",
+    },
     step2Title: { it: "Miscelazione twin-rotor", en: "Twin-rotor blending" },
-    step2Desc: { it: "La cella twin-rotor brevettata genera micro-vortici, eliminando le zone morte.", en: "Patented twin-rotor cell creates micro-vortices, eliminating dead zones." },
+    step2Desc: {
+      it: "La cella twin-rotor brevettata genera micro-vortici, eliminando le zone morte.",
+      en: "Patented twin-rotor cell creates micro-vortices, eliminating dead zones.",
+    },
     step3Title: { it: "Verifica inline", en: "Inline verification" },
-    step3Desc: { it: "Sensori ottici validano l'omogeneità in tempo reale prima dello scarico.", en: "Optical sensors validate homogeneity in real time before discharge." },
+    step3Desc: {
+      it: "Sensori ottici validano l'omogeneità in tempo reale prima dello scarico.",
+      en: "Optical sensors validate homogeneity in real time before discharge.",
+    },
     aboutKicker: { it: "Chi è MixCore", en: "About MixCore" },
     aboutTitle: {
       it: "18 anni di ingegneria della miscelazione, un brevetto che ha cambiato lo standard.",
@@ -78,9 +105,18 @@ export const dict = {
       it: "Fondata nel 2007 a Milano, MixCore progetta e produce sistemi di miscelazione industriale per settori regolamentati. La nostra cella twin-rotor brevettata (EP3 482 109) è oggi installata su linee farmaceutiche, alimentari, chimiche e petrolchimiche in 42 paesi.",
       en: "Founded in 2007 in Milan, MixCore designs and manufactures industrial mixing systems for regulated industries. Our patented twin-rotor cell (EP3 482 109) is now deployed across pharma, food, chemical and petrochemical production lines in 42 countries.",
     },
-    trustedBy: { it: "Scelti da produttori in 42 paesi", en: "Trusted by manufacturers in 42 countries" },
-    industryDesc: { it: "Ingegnerizzato per le esigenze normative e di processo della produzione", en: "Engineered for the regulatory and process demands of" },
-    ctaTitle: { it: "Configura il tuo mixer. Preventivo in 24 ore.", en: "Build your mixer. Get a quote in 24 hours." },
+    trustedBy: {
+      it: "Scelti da produttori in 42 paesi",
+      en: "Trusted by manufacturers in 42 countries",
+    },
+    industryDesc: {
+      it: "Ingegnerizzato per le esigenze normative e di processo della produzione",
+      en: "Engineered for the regulatory and process demands of",
+    },
+    ctaTitle: {
+      it: "Configura il tuo mixer. Preventivo in 24 ore.",
+      en: "Build your mixer. Get a quote in 24 hours.",
+    },
     ctaBody: {
       it: "Configura modello e opzioni in pochi minuti. Il nostro team di ingegneria revisiona ogni richiesta e risponde con una proposta su misura.",
       en: "Configure your model and options in minutes. Our engineering team reviews every request and replies with a tailored proposal.",
@@ -99,13 +135,25 @@ export const dict = {
     howKicker: { it: "Come avviene il processo", en: "How the process works" },
     howTitle: { it: "Quattro fasi, un loop chiuso.", en: "Four stages, one closed loop." },
     p1Title: { it: "Iniezione in controcorrente", en: "Counter-flow injection" },
-    p1Desc: { it: "Due sostanze entrano nella camera da bocchette opposte, ognuna pre-condizionata per taglio, temperatura e portata.", en: "Two substances enter the mixing chamber through opposing inlets, each pre-conditioned for shear, temperature and flow rate." },
+    p1Desc: {
+      it: "Due sostanze entrano nella camera da bocchette opposte, ognuna pre-condizionata per taglio, temperatura e portata.",
+      en: "Two substances enter the mixing chamber through opposing inlets, each pre-conditioned for shear, temperature and flow rate.",
+    },
     p2Title: { it: "Vortice twin-rotor", en: "Twin-rotor vortex" },
-    p2Desc: { it: "La geometria twin-rotor brevettata genera micro-vortici sincronizzati, eliminando zone morte e sovra-taglio.", en: "Our patented twin-rotor geometry generates synchronized micro-vortices, eliminating dead zones and overshear." },
+    p2Desc: {
+      it: "La geometria twin-rotor brevettata genera micro-vortici sincronizzati, eliminando zone morte e sovra-taglio.",
+      en: "Our patented twin-rotor geometry generates synchronized micro-vortices, eliminating dead zones and overshear.",
+    },
     p3Title: { it: "Verifica inline", en: "Inline verification" },
-    p3Desc: { it: "Sensori ottici e ultrasonici validano la distribuzione delle particelle in tempo reale prima dello scarico.", en: "Optical and ultrasonic sensors validate particle distribution in real time before discharge." },
+    p3Desc: {
+      it: "Sensori ottici e ultrasonici validano la distribuzione delle particelle in tempo reale prima dello scarico.",
+      en: "Optical and ultrasonic sensors validate particle distribution in real time before discharge.",
+    },
     p4Title: { it: "Controllo in anello chiuso", en: "Closed-loop control" },
-    p4Desc: { it: "Il PLC regola al volo la velocità del rotore e i tempi di permanenza per restare nelle tolleranze di ricetta.", en: "The PLC adjusts rotor speed and dwell time on the fly to hold the recipe within target tolerance." },
+    p4Desc: {
+      it: "Il PLC regola al volo la velocità del rotore e i tempi di permanenza per restare nelle tolleranze di ricetta.",
+      en: "The PLC adjusts rotor speed and dwell time on the fly to hold the recipe within target tolerance.",
+    },
     specsKicker: { it: "Specifiche tecniche", en: "Technical specifications" },
     specsTitle: { it: "Range ingegnerizzato.", en: "Engineered envelope." },
     specsIntro: {
@@ -116,24 +164,96 @@ export const dict = {
     casesKicker: { it: "Casi d'uso", en: "Use cases" },
     casesTitle: { it: "Settori per cui progettiamo.", en: "Industries we engineer for." },
     spec: {
-      throughput: { k: { it: "Portata", en: "Throughput" }, v: { it: "50 — 5.000 L per batch", en: "50 — 5,000 L per batch" } },
-      precision: { k: { it: "Precisione di miscelazione", en: "Mixing precision" }, v: { it: "Omogeneizzazione fino a 0,8 µm", en: "Down to 0.8 µm homogenization" } },
-      viscosity: { k: { it: "Range di viscosità", en: "Viscosity range" }, v: { it: "1 cP — 250.000 cP", en: "1 cP — 250,000 cP" } },
-      power: { k: { it: "Potenza motore", en: "Drive power" }, v: { it: "1,5 — 75 kW (a frequenza controllata)", en: "1.5 — 75 kW (frequency controlled)" } },
-      materials: { k: { it: "Materiali a contatto", en: "Contact materials" }, v: { it: "AISI 304 / 316L / Hastelloy C-22", en: "AISI 304 / 316L / Hastelloy C-22" } },
-      temp: { k: { it: "Temperatura d'esercizio", en: "Operating temperature" }, v: { it: "-10 °C a +180 °C", en: "-10 °C to +180 °C" } },
-      pressure: { k: { it: "Pressione di lavoro", en: "Working pressure" }, v: { it: "Fino a 6 bar (camicia)", en: "Up to 6 bar (jacketed)" } },
-      certs: { k: { it: "Certificazioni", en: "Certifications" }, v: { it: "CE, ATEX, FDA, 3-A sanitary, IECEx", en: "CE, ATEX, FDA, 3-A sanitary, IECEx" } },
-      control: { k: { it: "Sistema di controllo", en: "Control system" }, v: { it: "Siemens S7-1500 / Rockwell ControlLogix", en: "Siemens S7-1500 / Rockwell ControlLogix" } },
-      connect: { k: { it: "Connettività", en: "Connectivity" }, v: { it: "OPC-UA, Modbus TCP, REST API, MQTT", en: "OPC-UA, Modbus TCP, REST API, MQTT" } },
+      throughput: {
+        k: { it: "Portata", en: "Throughput" },
+        v: { it: "50 — 5.000 L per batch", en: "50 — 5,000 L per batch" },
+      },
+      precision: {
+        k: { it: "Precisione di miscelazione", en: "Mixing precision" },
+        v: { it: "Omogeneizzazione fino a 0,8 µm", en: "Down to 0.8 µm homogenization" },
+      },
+      viscosity: {
+        k: { it: "Range di viscosità", en: "Viscosity range" },
+        v: { it: "1 cP — 250.000 cP", en: "1 cP — 250,000 cP" },
+      },
+      power: {
+        k: { it: "Potenza motore", en: "Drive power" },
+        v: {
+          it: "1,5 — 75 kW (a frequenza controllata)",
+          en: "1.5 — 75 kW (frequency controlled)",
+        },
+      },
+      materials: {
+        k: { it: "Materiali a contatto", en: "Contact materials" },
+        v: { it: "AISI 304 / 316L / Hastelloy C-22", en: "AISI 304 / 316L / Hastelloy C-22" },
+      },
+      temp: {
+        k: { it: "Temperatura d'esercizio", en: "Operating temperature" },
+        v: { it: "-10 °C a +180 °C", en: "-10 °C to +180 °C" },
+      },
+      pressure: {
+        k: { it: "Pressione di lavoro", en: "Working pressure" },
+        v: { it: "Fino a 6 bar (camicia)", en: "Up to 6 bar (jacketed)" },
+      },
+      certs: {
+        k: { it: "Certificazioni", en: "Certifications" },
+        v: { it: "CE, ATEX, FDA, 3-A sanitary, IECEx", en: "CE, ATEX, FDA, 3-A sanitary, IECEx" },
+      },
+      control: {
+        k: { it: "Sistema di controllo", en: "Control system" },
+        v: {
+          it: "Siemens S7-1500 / Rockwell ControlLogix",
+          en: "Siemens S7-1500 / Rockwell ControlLogix",
+        },
+      },
+      connect: {
+        k: { it: "Connettività", en: "Connectivity" },
+        v: { it: "OPC-UA, Modbus TCP, REST API, MQTT", en: "OPC-UA, Modbus TCP, REST API, MQTT" },
+      },
     },
     industries: {
-      pharma: { n: { it: "Farmaceutico", en: "Pharmaceutical" }, d: { it: "Formulazione di API, adiuvanti vaccinali, build sanitari sterili con piena tracciabilità.", en: "API formulation, vaccine adjuvants, sterile sanitary builds with full traceability." } },
-      food: { n: { it: "Food & Beverage", en: "Food & Beverage" }, d: { it: "Emulsioni, salse, latticini e blend vegetali con pulizia CIP/SIP.", en: "Emulsions, sauces, dairy and plant-based blends with CIP/SIP cleaning." } },
-      chem: { n: { it: "Chimico", en: "Chemicals" }, d: { it: "Miscelazione reattiva, dispersione polimeri, omogeneizzazione catalizzatori in scala.", en: "Reactive mixing, polymer dispersion, catalyst homogenization at scale." } },
-      cosm: { n: { it: "Cosmetica", en: "Cosmetics" }, d: { it: "Creme, gel e lozioni ad alta viscosità con aerazione controllata.", en: "High-viscosity creams, gels and lotions with controlled aeration." } },
-      petro: { n: { it: "Petrolchimico", en: "Petrochemical" }, d: { it: "Miscelazione di solventi e additivi certificata ATEX per ambienti pericolosi.", en: "ATEX-rated solvent and additive blending for hazardous environments." } },
-      constr: { n: { it: "Edilizia", en: "Construction" }, d: { it: "Slurry abrasive, malte e sistemi resinosi con drive train rinforzato.", en: "Abrasive slurries, mortars and resin systems with reinforced drive train." } },
+      pharma: {
+        n: { it: "Farmaceutico", en: "Pharmaceutical" },
+        d: {
+          it: "Formulazione di API, adiuvanti vaccinali, build sanitari sterili con piena tracciabilità.",
+          en: "API formulation, vaccine adjuvants, sterile sanitary builds with full traceability.",
+        },
+      },
+      food: {
+        n: { it: "Food & Beverage", en: "Food & Beverage" },
+        d: {
+          it: "Emulsioni, salse, latticini e blend vegetali con pulizia CIP/SIP.",
+          en: "Emulsions, sauces, dairy and plant-based blends with CIP/SIP cleaning.",
+        },
+      },
+      chem: {
+        n: { it: "Chimico", en: "Chemicals" },
+        d: {
+          it: "Miscelazione reattiva, dispersione polimeri, omogeneizzazione catalizzatori in scala.",
+          en: "Reactive mixing, polymer dispersion, catalyst homogenization at scale.",
+        },
+      },
+      cosm: {
+        n: { it: "Cosmetica", en: "Cosmetics" },
+        d: {
+          it: "Creme, gel e lozioni ad alta viscosità con aerazione controllata.",
+          en: "High-viscosity creams, gels and lotions with controlled aeration.",
+        },
+      },
+      petro: {
+        n: { it: "Petrolchimico", en: "Petrochemical" },
+        d: {
+          it: "Miscelazione di solventi e additivi certificata ATEX per ambienti pericolosi.",
+          en: "ATEX-rated solvent and additive blending for hazardous environments.",
+        },
+      },
+      constr: {
+        n: { it: "Edilizia", en: "Construction" },
+        d: {
+          it: "Slurry abrasive, malte e sistemi resinosi con drive train rinforzato.",
+          en: "Abrasive slurries, mortars and resin systems with reinforced drive train.",
+        },
+      },
     },
   },
   cfg: {
@@ -166,7 +286,10 @@ export const dict = {
     select: { it: "Seleziona", en: "Select" },
     saving: { it: "Risparmio", en: "Savings" },
     compareMode: { it: "Modalità confronto", en: "Compare mode" },
-    compareHint: { it: "Confronta due configurazioni affiancate", en: "Compare two configurations side by side" },
+    compareHint: {
+      it: "Confronta due configurazioni affiancate",
+      en: "Compare two configurations side by side",
+    },
     slot: { it: "Configurazione", en: "Configuration" },
     activeSlot: { it: "Configurazione attiva", en: "Active configuration" },
     editing: { it: "In modifica", en: "Editing" },
@@ -192,7 +315,10 @@ export const dict = {
     email: { it: "Email aziendale", en: "Work email" },
     phone: { it: "Telefono", en: "Phone" },
     notes: { it: "Note", en: "Notes" },
-    notesPh: { it: "Applicazione, portata target, tempistiche…", en: "Application, target throughput, timeline…" },
+    notesPh: {
+      it: "Applicazione, portata target, tempistiche…",
+      en: "Application, target throughput, timeline…",
+    },
     received: { it: "Richiesta ricevuta", en: "Quote request received" },
     receivedBody: {
       it: "Il nostro team commerciale-tecnico ti risponderà entro un giorno lavorativo.",

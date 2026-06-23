@@ -1,4 +1,12 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import { dict, type Lang } from "./translations";
 
 type BiString = { it: string; en: string };
@@ -36,12 +44,18 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     try {
       const saved = localStorage.getItem("mixcore.lang");
       if (saved === "it" || saved === "en") setLangState(saved);
-    } catch { /* SSR */ }
+    } catch {
+      /* SSR */
+    }
   }, []);
 
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
-    try { localStorage.setItem("mixcore.lang", l); } catch { /* noop */ }
+    try {
+      localStorage.setItem("mixcore.lang", l);
+    } catch {
+      /* noop */
+    }
     if (typeof document !== "undefined") document.documentElement.lang = l;
   }, []);
 
@@ -49,12 +63,18 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   const pick = useCallback(<T extends BiString>(b: T) => b[lang], [lang]);
 
-  const t = useCallback((path: string) => {
-    const v = resolve(path);
-    return v ? v[lang] : path;
-  }, [lang]);
+  const t = useCallback(
+    (path: string) => {
+      const v = resolve(path);
+      return v ? v[lang] : path;
+    },
+    [lang],
+  );
 
-  const value = useMemo(() => ({ lang, setLang, toggle, t, pick }), [lang, setLang, toggle, t, pick]);
+  const value = useMemo(
+    () => ({ lang, setLang, toggle, t, pick }),
+    [lang, setLang, toggle, t, pick],
+  );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 
