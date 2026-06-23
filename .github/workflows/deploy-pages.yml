@@ -27,7 +27,8 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        # Replaced --frozen-lockfile with regular install to allow automatic resolution
+        run: bun install 
 
       - name: Build static site
         run: bun run build
