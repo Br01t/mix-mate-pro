@@ -26,10 +26,18 @@ export function useConfigurator() {
       return next;
     });
 
+  const selectAllOptionals = () => setSelectedOptionals(new Set(optionals.map((o) => o.id)));
+  const clearAllOptionals = () => setSelectedOptionals(new Set());
+
   const reset = () => {
     setModelId(models[0].id);
     setSelectedOptionals(new Set());
   };
 
-  return { model, modelId, setModelId, chosenOptionals, selectedOptionals, toggleOptional, total, reset };
+  return {
+    model, modelId, setModelId,
+    chosenOptionals, selectedOptionals,
+    toggleOptional, selectAllOptionals, clearAllOptionals,
+    total, reset,
+  };
 }
