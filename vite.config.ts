@@ -1,4 +1,3 @@
-// Uses @lovable.dev/vite-tanstack-config — do not duplicate its bundled plugins manually.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 const repoBase = "/mix-mate-pro/";
