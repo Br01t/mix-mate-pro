@@ -10,16 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import type { Model } from "@/data/models";
 import type { Optional } from "@/data/optionals";
 import { formatEUR } from "@/lib/format";
-
-const schema = z.object({
-  name: z.string().trim().min(2, "Please enter your full name").max(100),
-  company: z.string().trim().min(2, "Company name is required").max(120),
-  email: z.string().trim().email("Enter a valid email").max(255),
-  phone: z.string().trim().min(5, "Enter a valid phone number").max(40),
-  notes: z.string().trim().max(1000).optional().or(z.literal("")),
-});
-
-type FormValues = z.infer<typeof schema>;
+import { useI18n } from "@/i18n/I18nProvider";
 
 export function QuoteDialog({
   open,
@@ -36,6 +27,17 @@ export function QuoteDialog({
   total: number;
   onResetConfig: () => void;
 }) {
+  const { lang, pick, t } = useI18n();
+
+  const schema = z.object({
+    name: z.string().trim().min(2, t("quote.errors.name")).max(100),
+    company: z.string().trim().min(2, t("quote.errors.company")).max(120),
+    email: z.string().trim().email(t("quote.errors.email")).max(255),
+    phone: z.string().trim().min(5, t("quote.errors.phone")).max(40),
+    notes: z.string().trim().max(1000).optional().or(z.literal("")),
+  });
+  type FormValues = z.infer<typeof schema>;
+
   const [values, setValues] = useState<FormValues>({ name: "", company: "", email: "", phone: "", notes: "" });
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -82,44 +84,40 @@ export function QuoteDialog({
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-primary/10 text-primary">
               <CheckCircle2 className="h-8 w-8" />
             </div>
-            <h3 className="mt-4 text-xl font-semibold">Quote request received</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Our sales engineering team will reply within one business day.
-            </p>
+            <h3 className="mt-4 text-xl font-semibold">{t("quote.received")}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">{t("quote.receivedBody")}</p>
             <div className="mx-auto mt-5 max-w-sm rounded-lg border bg-muted/40 p-4 text-left text-sm">
-              <div className="flex justify-between"><span className="text-muted-foreground">Reference</span><span className="font-mono font-semibold">{submitted.ref}</span></div>
-              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">Model</span><span className="font-medium">{model.name}</span></div>
-              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">Options</span><span className="font-medium">{chosenOptionals.length}</span></div>
-              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">Total</span><span className="font-semibold">{formatEUR(total)}</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">{t("quote.reference")}</span><span className="font-mono font-semibold">{submitted.ref}</span></div>
+              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">{t("quote.model")}</span><span className="font-medium">{model.name}</span></div>
+              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">{t("quote.options")}</span><span className="font-medium">{chosenOptionals.length}</span></div>
+              <div className="mt-1 flex justify-between"><span className="text-muted-foreground">{t("quote.total")}</span><span className="font-semibold">{formatEUR(total, lang)}</span></div>
             </div>
             <div className="mt-6 flex justify-center gap-2">
-              <Button variant="outline" onClick={() => handleClose(false)}>Close</Button>
+              <Button variant="outline" onClick={() => handleClose(false)}>{t("common.close")}</Button>
               <Button
                 onClick={() => {
                   onResetConfig();
                   handleClose(false);
                 }}
               >
-                Configure another
+                {t("quote.configAnother")}
               </Button>
             </div>
           </div>
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle>Request official quote</DialogTitle>
-              <DialogDescription>
-                Submit your details — our team will reply with a tailored proposal within one business day.
-              </DialogDescription>
+              <DialogTitle>{t("quote.title")}</DialogTitle>
+              <DialogDescription>{t("quote.desc")}</DialogDescription>
             </DialogHeader>
 
             <div className="rounded-lg border bg-muted/40 p-4 text-sm">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-semibold">{model.name}</p>
-                  <p className="text-xs text-muted-foreground">{model.tagline} · {model.capacity}</p>
+                  <p className="text-xs text-muted-foreground">{pick(model.tagline)} · {model.capacity}</p>
                 </div>
-                <p className="text-lg font-semibold tabular-nums">{formatEUR(total)}</p>
+                <p className="text-lg font-semibold tabular-nums">{formatEUR(total, lang)}</p>
               </div>
               {chosenOptionals.length > 0 && (
                 <>
@@ -127,8 +125,8 @@ export function QuoteDialog({
                   <ul className="grid gap-1 text-xs text-muted-foreground sm:grid-cols-2">
                     {chosenOptionals.map((o) => (
                       <li key={o.id} className="flex justify-between gap-2">
-                        <span className="truncate">{o.name}</span>
-                        <span className="tabular-nums">+{formatEUR(o.price)}</span>
+                        <span className="truncate">{pick(o.name)}</span>
+                        <span className="tabular-nums">+{formatEUR(o.price, lang)}</span>
                       </li>
                     ))}
                   </ul>
@@ -137,19 +135,19 @@ export function QuoteDialog({
             </div>
 
             <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
-              <Field id="name" label="Full name" value={values.name} onChange={update("name")} error={errors.name} />
-              <Field id="company" label="Company" value={values.company} onChange={update("company")} error={errors.company} />
-              <Field id="email" type="email" label="Work email" value={values.email} onChange={update("email")} error={errors.email} />
-              <Field id="phone" label="Phone" value={values.phone} onChange={update("phone")} error={errors.phone} />
+              <Field id="name" label={t("quote.fullName")} value={values.name} onChange={update("name")} error={errors.name} />
+              <Field id="company" label={t("quote.company")} value={values.company} onChange={update("company")} error={errors.company} />
+              <Field id="email" type="email" label={t("quote.email")} value={values.email} onChange={update("email")} error={errors.email} />
+              <Field id="phone" label={t("quote.phone")} value={values.phone} onChange={update("phone")} error={errors.phone} />
               <div className="sm:col-span-2">
-                <Label htmlFor="notes">Notes <span className="text-muted-foreground">(optional)</span></Label>
-                <Textarea id="notes" rows={3} value={values.notes} onChange={update("notes")} className="mt-1.5" placeholder="Application, target throughput, timeline…" />
+                <Label htmlFor="notes">{t("quote.notes")} <span className="text-muted-foreground">({t("common.optional")})</span></Label>
+                <Textarea id="notes" rows={3} value={values.notes} onChange={update("notes")} className="mt-1.5" placeholder={t("quote.notesPh")} />
               </div>
               <div className="sm:col-span-2 flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={() => handleClose(false)}>Cancel</Button>
+                <Button type="button" variant="outline" onClick={() => handleClose(false)}>{t("common.cancel")}</Button>
                 <Button type="submit" disabled={submitting}>
                   {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Submit request
+                  {t("common.submit")}
                 </Button>
               </div>
             </form>
