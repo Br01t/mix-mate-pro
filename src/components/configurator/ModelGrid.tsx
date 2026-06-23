@@ -10,12 +10,20 @@ const cats: (ModelCategory | "all")[] = ["all", "lab", "pilot", "production", "h
 export function ModelGrid({
   selectedId,
   onSelect,
+  selectedIdA,
+  selectedIdB,
+  activeSlot,
 }: {
   selectedId: string;
   onSelect: (id: string) => void;
+  /** When provided + compare mode, shows A/B markers on respective cards */
+  selectedIdA?: string;
+  selectedIdB?: string;
+  activeSlot?: "A" | "B";
 }) {
   const { lang, pick, t } = useI18n();
   const [filter, setFilter] = useState<(typeof cats)[number]>("all");
+  const compareMode = selectedIdA !== undefined && selectedIdB !== undefined;
 
   const visible = useMemo(
     () => (filter === "all" ? models : models.filter((m) => m.category === filter)),
@@ -47,7 +55,18 @@ export function ModelGrid({
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((m) => {
-          const active = m.id === selectedId;
+          const inA = compareMode && selectedIdA === m.id;
+          const inB = compareMode && selectedIdB === m.id;
+          const active = compareMode
+            ? (activeSlot === "A" ? inA : inB)
+            : m.id === selectedId;
+
+          const ringClass = compareMode
+            ? (active
+                ? (activeSlot === "A" ? "border-primary ring-2 ring-primary/40 shadow-lg" : "border-accent ring-2 ring-accent/40 shadow-lg")
+                : inA || inB ? "border-border ring-1 ring-border" : "border-border")
+            : (active ? "border-primary ring-2 ring-primary/30 shadow-lg" : "border-border");
+
           return (
             <button
               key={m.id}
@@ -55,10 +74,9 @@ export function ModelGrid({
               onClick={() => onSelect(m.id)}
               className={cn(
                 "group relative flex flex-col overflow-hidden rounded-xl border bg-card text-left transition-all duration-300",
-                "hover:-translate-y-1 hover:border-primary/60 hover:shadow-lg",
-                active
-                  ? "border-primary ring-2 ring-primary/30 shadow-lg"
-                  : "border-border",
+                "hover:-translate-y-1 hover:shadow-lg",
+                !active && "hover:border-primary/60",
+                ringClass,
               )}
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-surface/10 to-steel/10">
@@ -75,11 +93,21 @@ export function ModelGrid({
                 <span className="absolute left-2 top-2 rounded-full bg-background/85 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground backdrop-blur">
                   {t(`categories.${m.category}`)}
                 </span>
-                {active && (
-                  <span className="absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground shadow-md animate-in zoom-in-50">
-                    <Check className="h-4 w-4" />
-                  </span>
-                )}
+
+                <div className="absolute right-2 top-2 flex gap-1">
+                  {compareMode ? (
+                    <>
+                      {inA && <SlotChip id="A" />}
+                      {inB && <SlotChip id="B" />}
+                    </>
+                  ) : (
+                    active && (
+                      <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground shadow-md animate-in zoom-in-50">
+                        <Check className="h-4 w-4" />
+                      </span>
+                    )
+                  )}
+                </div>
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <div className="flex items-start justify-between gap-2">
@@ -102,5 +130,19 @@ export function ModelGrid({
         })}
       </div>
     </div>
+  );
+}
+
+function SlotChip({ id }: { id: "A" | "B" }) {
+  return (
+    <span
+      className={cn(
+        "grid h-7 w-7 place-items-center rounded-full text-xs font-bold shadow-md animate-in zoom-in-50",
+        id === "A" ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground",
+      )}
+      title={`Configurazione ${id}`}
+    >
+      {id}
+    </span>
   );
 }
