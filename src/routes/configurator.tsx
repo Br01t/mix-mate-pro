@@ -530,6 +530,7 @@ function ConfiguratorPage() {
                   selectedIdA={cfg.compare ? cfg.A.model.id : undefined}
                   selectedIdB={cfg.compare ? cfg.B.model.id : undefined}
                   activeSlot={cfg.compare ? cfg.active : undefined}
+                  onSelectFor={cfg.compare ? cfg.setModelIdFor : undefined}
                   recommendedIds={cfg.recommendedModelIds}
                 />
 
