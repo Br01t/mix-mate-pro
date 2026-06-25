@@ -1,6 +1,5 @@
-import { optionals, type Optional } from "@/data/optionals";
+import { optionals } from "@/data/optionals";
 import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { formatEUR } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
