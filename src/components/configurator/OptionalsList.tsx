@@ -112,30 +112,69 @@ export function OptionalsList({
   return (
     <div className="space-y-8">
       {/* Header controls */}
-      <div className="flex items-center justify-between text-xs border-b border-border pb-3">
-        <span className="text-muted-foreground">
-          <span className="font-semibold text-foreground tabular-nums">{selected.size}</span> /{" "}
-          {optionals.length}{" "}
-          {selected.size === 1 ? t("cfg.optionSelected") : t("cfg.optionsSelected")}
-        </span>
-        <div className="flex gap-3">
-          <button
-            type="button"
-            onClick={onSelectAll}
-            className="font-semibold text-primary hover:underline"
-          >
-            {t("cfg.selectAll")}
-          </button>
-          <span className="text-border">·</span>
-          <button
-            type="button"
-            onClick={onClearAll}
-            className="font-semibold text-muted-foreground hover:text-foreground hover:underline"
-          >
-            {t("cfg.clearAll")}
-          </button>
+      {compareMode ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3 text-xs">
+          <div className="flex items-center gap-4">
+            <span className="inline-flex items-center gap-1.5 text-foreground">
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                A
+              </span>
+              <span className="font-bold tabular-nums">{selectedA!.size}</span>
+              <span className="text-muted-foreground">/ {optionals.length}</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-foreground">
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                B
+              </span>
+              <span className="font-bold tabular-nums">{selectedB!.size}</span>
+              <span className="text-muted-foreground">/ {optionals.length}</span>
+            </span>
+          </div>
+          {onSelectAllFor && onClearAllFor && (
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => onClearAllFor("A")}
+                className="rounded-md border border-border px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:border-primary hover:text-primary"
+              >
+                {lang === "it" ? "Svuota A" : "Clear A"}
+              </button>
+              <button
+                type="button"
+                onClick={() => onClearAllFor("B")}
+                className="rounded-md border border-border px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:border-accent hover:text-accent"
+              >
+                {lang === "it" ? "Svuota B" : "Clear B"}
+              </button>
+            </div>
+          )}
         </div>
-      </div>
+      ) : (
+        <div className="flex items-center justify-between text-xs border-b border-border pb-3">
+          <span className="text-muted-foreground">
+            <span className="font-semibold text-foreground tabular-nums">{selected.size}</span> /{" "}
+            {optionals.length}{" "}
+            {selected.size === 1 ? t("cfg.optionSelected") : t("cfg.optionsSelected")}
+          </span>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={onSelectAll}
+              className="font-semibold text-primary hover:underline"
+            >
+              {t("cfg.selectAll")}
+            </button>
+            <span className="text-border">·</span>
+            <button
+              type="button"
+              onClick={onClearAll}
+              className="font-semibold text-muted-foreground hover:text-foreground hover:underline"
+            >
+              {t("cfg.clearAll")}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Categorized optionals */}
       {categories.map((cat) => {
