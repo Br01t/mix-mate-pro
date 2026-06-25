@@ -374,21 +374,52 @@ export function ModelGrid({
 
                 {/* Footer Buttons */}
                 <div className="mt-5 flex gap-2 border-t border-border pt-4">
-                  <Button
-                    type="button"
-                    onClick={() => onSelect(m.id)}
-                    className="flex-1"
-                    variant={active ? "default" : "outline"}
-                    size="sm"
-                  >
-                    {active
-                      ? lang === "it"
-                        ? "Selezionato"
-                        : "Selected"
-                      : lang === "it"
-                        ? "Seleziona"
-                        : "Select"}
-                  </Button>
+                  {compareMode && onSelectFor ? (
+                    <div className="flex flex-1 gap-1.5">
+                      <Button
+                        type="button"
+                        onClick={() => onSelectFor("A", m.id)}
+                        className={cn(
+                          "flex-1 px-2 text-xs font-bold",
+                          inA &&
+                            "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+                        )}
+                        variant={inA ? "default" : "outline"}
+                        size="sm"
+                      >
+                        {inA ? `✓ ${lang === "it" ? "In A" : "In A"}` : lang === "it" ? "Usa in A" : "Use in A"}
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => onSelectFor("B", m.id)}
+                        className={cn(
+                          "flex-1 px-2 text-xs font-bold",
+                          inB &&
+                            "bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm border-accent",
+                        )}
+                        variant={inB ? "default" : "outline"}
+                        size="sm"
+                      >
+                        {inB ? `✓ ${lang === "it" ? "In B" : "In B"}` : lang === "it" ? "Usa in B" : "Use in B"}
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      type="button"
+                      onClick={() => onSelect(m.id)}
+                      className="flex-1"
+                      variant={active ? "default" : "outline"}
+                      size="sm"
+                    >
+                      {active
+                        ? lang === "it"
+                          ? "Selezionato"
+                          : "Selected"
+                        : lang === "it"
+                          ? "Seleziona"
+                          : "Select"}
+                    </Button>
+                  )}
                   <Button
                     type="button"
                     variant="secondary"
