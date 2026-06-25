@@ -324,15 +324,3 @@ export function OptionalsList({
   );
 }
 
-function SlotDot({ id }: { id: "A" | "B" }) {
-  return (
-    <span
-      className={cn(
-        "grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold shadow-sm",
-        id === "A" ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground",
-      )}
-    >
-      {id}
-    </span>
-  );
-}
