@@ -193,34 +193,49 @@ function ConfiguratorPage() {
         </div>
       </section>
 
-      {/* Compare floating slot picker */}
-      {cfg.compare && (
-        <section className="sticky top-16 z-30 border-b border-border bg-background/95 shadow-sm backdrop-blur">
-          <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
-            <span className="hidden text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:inline">
-              {t("cfg.editing")}:
-            </span>
-            <div className="flex flex-1 gap-2 sm:flex-none">
+      {/* Compare live A/B summary bar (only steps 2-3, non-sticky to avoid stack on small screens) */}
+      {cfg.compare && (cfg.step === 2 || cfg.step === 3) && (
+        <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+          <div className="rounded-xl border border-border bg-card p-3 shadow-sm sm:p-4">
+            <div className="mb-2.5 flex items-center justify-between gap-3">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                {lang === "it" ? "Confronto in tempo reale" : "Live comparison"}
+              </p>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={cfg.duplicateAB}
+                  className="rounded-md border border-border bg-card px-2 py-1 text-[10px] font-semibold text-muted-foreground hover:border-primary hover:text-primary"
+                  title={lang === "it" ? "Copia A in B" : "Duplicate A→B"}
+                >
+                  A → B
+                </button>
+                <button
+                  type="button"
+                  onClick={cfg.swapAB}
+                  className="rounded-md border border-border bg-card px-2 py-1 text-[10px] font-semibold text-muted-foreground hover:border-foreground hover:text-foreground"
+                  title={lang === "it" ? "Scambia A e B" : "Swap A↔B"}
+                >
+                  A ⇄ B
+                </button>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               {(["A", "B"] as const).map((s) => {
                 const data = s === "A" ? cfg.A : cfg.B;
-                const isActive = cfg.active === s;
                 return (
-                  <button
+                  <div
                     key={s}
-                    type="button"
-                    onClick={() => cfg.setActive(s)}
                     className={cn(
-                      "flex flex-1 items-center gap-3 rounded-lg border px-3 py-2 text-left transition-all sm:flex-none",
-                      isActive
-                        ? s === "A"
-                          ? "border-primary bg-primary/10 shadow-sm"
-                          : "border-accent bg-accent/10 shadow-sm"
-                        : "border-border bg-card hover:border-foreground/20",
+                      "flex items-center gap-2.5 rounded-lg border p-2.5 sm:gap-3 sm:p-3",
+                      s === "A"
+                        ? "border-primary/30 bg-primary/5"
+                        : "border-accent/30 bg-accent/5",
                     )}
                   >
                     <span
                       className={cn(
-                        "grid h-8 w-8 place-items-center rounded-md text-sm font-bold",
+                        "grid h-9 w-9 shrink-0 place-items-center rounded-md text-sm font-bold sm:h-10 sm:w-10",
                         s === "A"
                           ? "bg-primary text-primary-foreground"
                           : "bg-accent text-accent-foreground",
@@ -228,15 +243,34 @@ function ConfiguratorPage() {
                     >
                       {s}
                     </span>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold leading-tight">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-xs font-bold leading-tight text-foreground sm:text-sm">
                         {data.model.name}
                       </p>
-                      <p className="text-xs text-muted-foreground tabular-nums">
-                        {data.chosen.length} opt · {data.total.toLocaleString()} €
+                      <p className="text-[10px] text-muted-foreground sm:text-xs">
+                        {data.chosen.length}{" "}
+                        {lang === "it" ? "optional" : "options"}
                       </p>
                     </div>
-                  </button>
+                    <div className="text-right">
+                      <p className="text-sm font-bold tabular-nums leading-tight text-foreground sm:text-base">
+                        {formatEUR(data.total, lang)}
+                      </p>
+                      {s === "B" && cfg.B.total !== cfg.A.total && (
+                        <p
+                          className={cn(
+                            "text-[10px] font-semibold tabular-nums",
+                            cfg.B.total > cfg.A.total
+                              ? "text-destructive"
+                              : "text-emerald-600 dark:text-emerald-400",
+                          )}
+                        >
+                          {cfg.B.total > cfg.A.total ? "+" : ""}
+                          {formatEUR(cfg.B.total - cfg.A.total, lang)}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 );
               })}
             </div>
