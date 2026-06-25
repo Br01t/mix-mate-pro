@@ -89,6 +89,9 @@ export function OptionalsList({
   selectedA,
   selectedB,
   activeSlot,
+  onToggleFor,
+  onSelectAllFor,
+  onClearAllFor,
   industry = null,
 }: {
   selected: Set<string>;
@@ -98,6 +101,9 @@ export function OptionalsList({
   selectedA?: Set<string>;
   selectedB?: Set<string>;
   activeSlot?: "A" | "B";
+  onToggleFor?: (slot: "A" | "B", id: string) => void;
+  onSelectAllFor?: (slot: "A" | "B") => void;
+  onClearAllFor?: (slot: "A" | "B") => void;
   industry?: string | null;
 }) {
   const { lang, pick, t } = useI18n();
