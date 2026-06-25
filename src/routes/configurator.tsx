@@ -571,6 +571,9 @@ function ConfiguratorPage() {
                   selectedA={cfg.compare ? cfg.A.optionals : undefined}
                   selectedB={cfg.compare ? cfg.B.optionals : undefined}
                   activeSlot={cfg.compare ? cfg.active : undefined}
+                  onToggleFor={cfg.compare ? cfg.toggleOptionalIn : undefined}
+                  onSelectAllFor={cfg.compare ? cfg.selectAllOptionalsIn : undefined}
+                  onClearAllFor={cfg.compare ? cfg.clearAllOptionalsIn : undefined}
                   industry={cfg.requirements.industry}
                 />
 
