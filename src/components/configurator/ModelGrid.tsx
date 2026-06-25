@@ -229,6 +229,7 @@ export function ModelGrid({
   selectedIdA,
   selectedIdB,
   activeSlot,
+  onSelectFor,
   recommendedIds = new Set(),
 }: {
   selectedId: string;
@@ -236,6 +237,7 @@ export function ModelGrid({
   selectedIdA?: string;
   selectedIdB?: string;
   activeSlot?: "A" | "B";
+  onSelectFor?: (slot: "A" | "B", id: string) => void;
   recommendedIds?: Set<string>;
 }) {
   const { lang, pick, t } = useI18n();
@@ -275,18 +277,18 @@ export function ModelGrid({
         {visible.map((m) => {
           const inA = compareMode && selectedIdA === m.id;
           const inB = compareMode && selectedIdB === m.id;
-          const active = compareMode ? (activeSlot === "A" ? inA : inB) : m.id === selectedId;
+          const active = compareMode ? inA || inB : m.id === selectedId;
 
           const isRecommended = recommendedIds.has(m.id);
 
           const ringClass = compareMode
-            ? active
-              ? activeSlot === "A"
-                ? "border-primary ring-2 ring-primary/40 shadow-lg"
-                : "border-accent ring-2 ring-accent/40 shadow-lg"
-              : inA || inB
-                ? "border-border ring-1 ring-border"
-                : "border-border"
+            ? inA && inB
+              ? "border-primary ring-2 ring-primary/40 shadow-lg"
+              : inA
+                ? "border-primary ring-2 ring-primary/30 shadow-md"
+                : inB
+                  ? "border-accent ring-2 ring-accent/30 shadow-md"
+                  : "border-border"
             : active
               ? "border-primary ring-2 ring-primary/30 shadow-lg"
               : "border-border";
@@ -372,21 +374,52 @@ export function ModelGrid({
 
                 {/* Footer Buttons */}
                 <div className="mt-5 flex gap-2 border-t border-border pt-4">
-                  <Button
-                    type="button"
-                    onClick={() => onSelect(m.id)}
-                    className="flex-1"
-                    variant={active ? "default" : "outline"}
-                    size="sm"
-                  >
-                    {active
-                      ? lang === "it"
-                        ? "Selezionato"
-                        : "Selected"
-                      : lang === "it"
-                        ? "Seleziona"
-                        : "Select"}
-                  </Button>
+                  {compareMode && onSelectFor ? (
+                    <div className="flex flex-1 gap-1.5">
+                      <Button
+                        type="button"
+                        onClick={() => onSelectFor("A", m.id)}
+                        className={cn(
+                          "flex-1 px-2 text-xs font-bold",
+                          inA &&
+                            "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+                        )}
+                        variant={inA ? "default" : "outline"}
+                        size="sm"
+                      >
+                        {inA ? `✓ ${lang === "it" ? "In A" : "In A"}` : lang === "it" ? "Usa in A" : "Use in A"}
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => onSelectFor("B", m.id)}
+                        className={cn(
+                          "flex-1 px-2 text-xs font-bold",
+                          inB &&
+                            "bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm border-accent",
+                        )}
+                        variant={inB ? "default" : "outline"}
+                        size="sm"
+                      >
+                        {inB ? `✓ ${lang === "it" ? "In B" : "In B"}` : lang === "it" ? "Usa in B" : "Use in B"}
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      type="button"
+                      onClick={() => onSelect(m.id)}
+                      className="flex-1"
+                      variant={active ? "default" : "outline"}
+                      size="sm"
+                    >
+                      {active
+                        ? lang === "it"
+                          ? "Selezionato"
+                          : "Selected"
+                        : lang === "it"
+                          ? "Seleziona"
+                          : "Select"}
+                    </Button>
+                  )}
                   <Button
                     type="button"
                     variant="secondary"

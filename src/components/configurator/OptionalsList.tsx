@@ -1,6 +1,5 @@
-import { optionals, type Optional } from "@/data/optionals";
+import { optionals } from "@/data/optionals";
 import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { formatEUR } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -89,6 +88,9 @@ export function OptionalsList({
   selectedA,
   selectedB,
   activeSlot,
+  onToggleFor,
+  onSelectAllFor,
+  onClearAllFor,
   industry = null,
 }: {
   selected: Set<string>;
@@ -98,6 +100,9 @@ export function OptionalsList({
   selectedA?: Set<string>;
   selectedB?: Set<string>;
   activeSlot?: "A" | "B";
+  onToggleFor?: (slot: "A" | "B", id: string) => void;
+  onSelectAllFor?: (slot: "A" | "B") => void;
+  onClearAllFor?: (slot: "A" | "B") => void;
   industry?: string | null;
 }) {
   const { lang, pick, t } = useI18n();
@@ -106,30 +111,69 @@ export function OptionalsList({
   return (
     <div className="space-y-8">
       {/* Header controls */}
-      <div className="flex items-center justify-between text-xs border-b border-border pb-3">
-        <span className="text-muted-foreground">
-          <span className="font-semibold text-foreground tabular-nums">{selected.size}</span> /{" "}
-          {optionals.length}{" "}
-          {selected.size === 1 ? t("cfg.optionSelected") : t("cfg.optionsSelected")}
-        </span>
-        <div className="flex gap-3">
-          <button
-            type="button"
-            onClick={onSelectAll}
-            className="font-semibold text-primary hover:underline"
-          >
-            {t("cfg.selectAll")}
-          </button>
-          <span className="text-border">·</span>
-          <button
-            type="button"
-            onClick={onClearAll}
-            className="font-semibold text-muted-foreground hover:text-foreground hover:underline"
-          >
-            {t("cfg.clearAll")}
-          </button>
+      {compareMode ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3 text-xs">
+          <div className="flex items-center gap-4">
+            <span className="inline-flex items-center gap-1.5 text-foreground">
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                A
+              </span>
+              <span className="font-bold tabular-nums">{selectedA!.size}</span>
+              <span className="text-muted-foreground">/ {optionals.length}</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-foreground">
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                B
+              </span>
+              <span className="font-bold tabular-nums">{selectedB!.size}</span>
+              <span className="text-muted-foreground">/ {optionals.length}</span>
+            </span>
+          </div>
+          {onSelectAllFor && onClearAllFor && (
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => onClearAllFor("A")}
+                className="rounded-md border border-border px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:border-primary hover:text-primary"
+              >
+                {lang === "it" ? "Svuota A" : "Clear A"}
+              </button>
+              <button
+                type="button"
+                onClick={() => onClearAllFor("B")}
+                className="rounded-md border border-border px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:border-accent hover:text-accent"
+              >
+                {lang === "it" ? "Svuota B" : "Clear B"}
+              </button>
+            </div>
+          )}
         </div>
-      </div>
+      ) : (
+        <div className="flex items-center justify-between text-xs border-b border-border pb-3">
+          <span className="text-muted-foreground">
+            <span className="font-semibold text-foreground tabular-nums">{selected.size}</span> /{" "}
+            {optionals.length}{" "}
+            {selected.size === 1 ? t("cfg.optionSelected") : t("cfg.optionsSelected")}
+          </span>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={onSelectAll}
+              className="font-semibold text-primary hover:underline"
+            >
+              {t("cfg.selectAll")}
+            </button>
+            <span className="text-border">·</span>
+            <button
+              type="button"
+              onClick={onClearAll}
+              className="font-semibold text-muted-foreground hover:text-foreground hover:underline"
+            >
+              {t("cfg.clearAll")}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Categorized optionals */}
       {categories.map((cat) => {
@@ -155,52 +199,46 @@ export function OptionalsList({
                 const cardClass = compareMode
                   ? cn(
                       "border-border",
-                      active && activeSlot === "A" && "border-primary/60 bg-primary/5 shadow-sm",
-                      active && activeSlot === "B" && "border-accent/60 bg-accent/5 shadow-sm",
-                      !active && (inA || inB) && "border-border bg-muted/20",
+                      inA && inB && "border-primary/60 bg-primary/5 shadow-sm",
+                      inA && !inB && "border-primary/40 bg-primary/[0.03]",
+                      inB && !inA && "border-accent/40 bg-accent/[0.03]",
                     )
                   : active
                     ? "border-primary/60 bg-primary/5 shadow-sm"
                     : "border-border hover:border-primary/30 hover:bg-muted/30";
 
                 return (
-                  <label
+                  <div
                     key={o.id}
-                    htmlFor={`opt-${o.id}`}
                     className={cn(
-                      "group relative flex cursor-pointer items-start gap-4 rounded-lg border bg-card p-4 transition-all duration-200",
+                      "group relative flex items-start gap-4 rounded-lg border bg-card p-4 transition-all duration-200",
                       cardClass,
                     )}
                   >
-                    {/* Compare markers */}
-                    {compareMode && (inA || inB) && (
-                      <div className="absolute right-3 top-3 flex gap-1">
-                        {inA && <SlotDot id="A" />}
-                        {inB && <SlotDot id="B" />}
-                      </div>
-                    )}
-
                     <div
                       className={cn(
                         "grid h-10 w-10 shrink-0 place-items-center rounded-lg transition-colors",
-                        active
-                          ? activeSlot === "B"
-                            ? "bg-accent text-accent-foreground"
-                            : "bg-primary text-primary-foreground"
-                          : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary",
+                        compareMode
+                          ? inA && inB
+                            ? "bg-gradient-to-br from-primary to-accent text-primary-foreground"
+                            : inA
+                              ? "bg-primary text-primary-foreground"
+                              : inB
+                                ? "bg-accent text-accent-foreground"
+                                : "bg-muted text-muted-foreground"
+                          : active
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary",
                       )}
                     >
                       <Icon className="h-5 w-5" />
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pr-12">
-                        <Label
-                          htmlFor={`opt-${o.id}`}
-                          className="cursor-pointer font-semibold text-foreground text-sm"
-                        >
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                        <span className="font-semibold text-foreground text-sm">
                           {pick(o.name)}
-                        </Label>
+                        </span>
 
                         {/* Recommendation badge */}
                         {recommendation && (
@@ -222,24 +260,60 @@ export function OptionalsList({
                         )}
                       </div>
 
-                      <p className="mt-1.5 text-xs text-muted-foreground leading-normal">
+                      <p className="mt-1.5 text-xs text-muted-foreground leading-normal line-clamp-2">
                         {pick(o.description)}
                       </p>
 
-                      <div className="mt-2 flex items-center justify-between gap-3">
+                      <div className="mt-2.5 flex items-center justify-between gap-3">
                         <span className="text-sm font-bold text-primary tabular-nums">
                           +{formatEUR(o.price, lang)}
                         </span>
 
-                        <Switch
-                          id={`opt-${o.id}`}
-                          checked={active}
-                          onCheckedChange={() => onToggle(o.id)}
-                          className="scale-90"
-                        />
+                        {compareMode && onToggleFor ? (
+                          <div className="flex items-center gap-1">
+                            <button
+                              type="button"
+                              onClick={() => onToggleFor("A", o.id)}
+                              aria-pressed={inA}
+                              className={cn(
+                                "grid h-7 min-w-[2.25rem] place-items-center rounded-md border px-2 text-[11px] font-bold transition-all",
+                                inA
+                                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                                  : "border-border bg-card text-muted-foreground hover:border-primary/60 hover:text-primary",
+                              )}
+                            >
+                              {inA ? "✓ A" : "+ A"}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => onToggleFor("B", o.id)}
+                              aria-pressed={inB}
+                              className={cn(
+                                "grid h-7 min-w-[2.25rem] place-items-center rounded-md border px-2 text-[11px] font-bold transition-all",
+                                inB
+                                  ? "border-accent bg-accent text-accent-foreground shadow-sm"
+                                  : "border-border bg-card text-muted-foreground hover:border-accent/60 hover:text-accent",
+                              )}
+                            >
+                              {inB ? "✓ B" : "+ B"}
+                            </button>
+                          </div>
+                        ) : (
+                          <label
+                            htmlFor={`opt-${o.id}`}
+                            className="cursor-pointer"
+                          >
+                            <Switch
+                              id={`opt-${o.id}`}
+                              checked={active}
+                              onCheckedChange={() => onToggle(o.id)}
+                              className="scale-90"
+                            />
+                          </label>
+                        )}
                       </div>
                     </div>
-                  </label>
+                  </div>
                 );
               })}
             </div>
@@ -250,15 +324,3 @@ export function OptionalsList({
   );
 }
 
-function SlotDot({ id }: { id: "A" | "B" }) {
-  return (
-    <span
-      className={cn(
-        "grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold shadow-sm",
-        id === "A" ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground",
-      )}
-    >
-      {id}
-    </span>
-  );
-}

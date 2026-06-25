@@ -100,23 +100,32 @@ export function useConfigurator() {
     return new Set(matches.map((m) => m.id));
   }, [requirements]);
 
-  const updateActive = (mut: (s: Slot) => Slot) =>
-    setSlots((prev) => ({ ...prev, [active]: mut(prev[active]) }));
+  const updateSlot = (slot: SlotId, mut: (s: Slot) => Slot) =>
+    setSlots((prev) => ({ ...prev, [slot]: mut(prev[slot]) }));
+
+  const updateActive = (mut: (s: Slot) => Slot) => updateSlot(active, mut);
 
   const setModelId = (id: string) => updateActive((s) => ({ ...s, modelId: id }));
+  const setModelIdFor = (slot: SlotId, id: string) =>
+    updateSlot(slot, (s) => ({ ...s, modelId: id }));
 
-  const toggleOptional = (id: string) =>
-    updateActive((s) => {
+  const toggleOptionalIn = (slot: SlotId, id: string) =>
+    updateSlot(slot, (s) => {
       const next = new Set(s.optionals);
       if (next.has(id)) next.delete(id);
       else next.add(id);
       return { ...s, optionals: next };
     });
+  const toggleOptional = (id: string) => toggleOptionalIn(active, id);
 
   const selectAllOptionals = () =>
     updateActive((s) => ({ ...s, optionals: new Set(optionals.map((o) => o.id)) }));
+  const selectAllOptionalsIn = (slot: SlotId) =>
+    updateSlot(slot, (s) => ({ ...s, optionals: new Set(optionals.map((o) => o.id)) }));
 
   const clearAllOptionals = () => updateActive((s) => ({ ...s, optionals: new Set() }));
+  const clearAllOptionalsIn = (slot: SlotId) =>
+    updateSlot(slot, (s) => ({ ...s, optionals: new Set() }));
 
   const resetActive = () => setSlots((prev) => ({ ...prev, [active]: initialSlot(models[0].id) }));
 
@@ -181,9 +190,13 @@ export function useConfigurator() {
     total: cur.total,
     // setters
     setModelId,
+    setModelIdFor,
     toggleOptional,
+    toggleOptionalIn,
     selectAllOptionals,
+    selectAllOptionalsIn,
     clearAllOptionals,
+    clearAllOptionalsIn,
     resetActive,
     reset,
     // compare
