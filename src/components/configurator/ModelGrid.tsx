@@ -229,6 +229,7 @@ export function ModelGrid({
   selectedIdA,
   selectedIdB,
   activeSlot,
+  onSelectFor,
   recommendedIds = new Set(),
 }: {
   selectedId: string;
@@ -236,6 +237,7 @@ export function ModelGrid({
   selectedIdA?: string;
   selectedIdB?: string;
   activeSlot?: "A" | "B";
+  onSelectFor?: (slot: "A" | "B", id: string) => void;
   recommendedIds?: Set<string>;
 }) {
   const { lang, pick, t } = useI18n();
