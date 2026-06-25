@@ -892,15 +892,36 @@ function ConfiguratorPage() {
       {/* Sticky Bottom Bar on Mobile/Tablet during steps 1 to 3 */}
       {cfg.step < 4 && (
         <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-border bg-background/95 p-4 shadow-lg backdrop-blur lg:hidden animate-in slide-in-from-bottom duration-300">
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-            <div>
-              <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider leading-none">
-                {lang === "it" ? "Configurazione" : "Configuration"}
-              </p>
-              <p className="text-base font-bold text-primary tabular-nums mt-1 leading-none">
-                {formatEUR(cfg.total, lang)}
-              </p>
-            </div>
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
+            {cfg.compare ? (
+              <div className="flex min-w-0 flex-1 gap-2">
+                <div className="flex min-w-0 flex-1 items-center gap-1.5">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary text-[10px] font-bold text-primary-foreground">
+                    A
+                  </span>
+                  <p className="truncate text-sm font-bold tabular-nums text-foreground">
+                    {formatEUR(cfg.A.total, lang)}
+                  </p>
+                </div>
+                <div className="flex min-w-0 flex-1 items-center gap-1.5">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-accent text-[10px] font-bold text-accent-foreground">
+                    B
+                  </span>
+                  <p className="truncate text-sm font-bold tabular-nums text-foreground">
+                    {formatEUR(cfg.B.total, lang)}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider leading-none">
+                  {lang === "it" ? "Configurazione" : "Configuration"}
+                </p>
+                <p className="text-base font-bold text-primary tabular-nums mt-1 leading-none">
+                  {formatEUR(cfg.total, lang)}
+                </p>
+              </div>
+            )}
             <div className="flex gap-2">
               {cfg.step > 1 && (
                 <Button variant="outline" size="sm" onClick={cfg.prevStep}>
