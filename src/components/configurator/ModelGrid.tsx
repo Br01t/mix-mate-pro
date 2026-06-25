@@ -277,18 +277,18 @@ export function ModelGrid({
         {visible.map((m) => {
           const inA = compareMode && selectedIdA === m.id;
           const inB = compareMode && selectedIdB === m.id;
-          const active = compareMode ? (activeSlot === "A" ? inA : inB) : m.id === selectedId;
+          const active = compareMode ? inA || inB : m.id === selectedId;
 
           const isRecommended = recommendedIds.has(m.id);
 
           const ringClass = compareMode
-            ? active
-              ? activeSlot === "A"
-                ? "border-primary ring-2 ring-primary/40 shadow-lg"
-                : "border-accent ring-2 ring-accent/40 shadow-lg"
-              : inA || inB
-                ? "border-border ring-1 ring-border"
-                : "border-border"
+            ? inA && inB
+              ? "border-primary ring-2 ring-primary/40 shadow-lg"
+              : inA
+                ? "border-primary ring-2 ring-primary/30 shadow-md"
+                : inB
+                  ? "border-accent ring-2 ring-accent/30 shadow-md"
+                  : "border-border"
             : active
               ? "border-primary ring-2 ring-primary/30 shadow-lg"
               : "border-border";
