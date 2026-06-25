@@ -190,9 +190,13 @@ export function useConfigurator() {
     total: cur.total,
     // setters
     setModelId,
+    setModelIdFor,
     toggleOptional,
+    toggleOptionalIn,
     selectAllOptionals,
+    selectAllOptionalsIn,
     clearAllOptionals,
+    clearAllOptionalsIn,
     resetActive,
     reset,
     // compare
