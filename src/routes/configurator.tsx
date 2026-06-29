@@ -138,12 +138,12 @@ function ConfiguratorPage() {
           src={heroBg}
           alt=""
           aria-hidden
-          className="absolute inset-0 h-full w-full object-cover opacity-20"
+          className="absolute inset-0 h-full w-full object-cover opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/60" />
         <div className="pointer-events-none absolute inset-0 opacity-25 [background:radial-gradient(55%_45%_at_82%_28%,oklch(0.66_0.13_195/.4),transparent_65%)]" />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8 lg:py-28">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">

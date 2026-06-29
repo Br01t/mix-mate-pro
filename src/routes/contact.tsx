@@ -80,8 +80,8 @@ function ContactPage() {
 
   const set =
     <K extends keyof typeof values>(k: K) =>
-    (v: (typeof values)[K]) =>
-      setValues((prev) => ({ ...prev, [k]: v }));
+      (v: (typeof values)[K]) =>
+        setValues((prev) => ({ ...prev, [k]: v }));
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -144,7 +144,7 @@ function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border bg-surface">
+      <section className="relative overflow-hidden border-b border-border bg-surface text-surface-foreground">
         <div className="pointer-events-none absolute inset-0 opacity-[0.35]">
           <div
             className="absolute inset-0"
@@ -164,10 +164,10 @@ function ContactPage() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
               {t("contact.kicker")}
             </p>
-            <h1 className="mt-4 text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-[44px]">
+            <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
               {t("contact.title")}
             </h1>
-            <p className="mt-5 max-w-xl text-[15.5px] leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-2xl text-lg text-surface-foreground/75">
               {t("contact.intro")}
             </p>
             <div className="mt-8 flex flex-wrap gap-2 text-[12px] font-medium">
@@ -230,13 +230,14 @@ function ContactPage() {
           <form
             onSubmit={onSubmit}
             noValidate
-            className="grid gap-6 rounded-2xl border border-border bg-surface/40 p-5 sm:p-8"
+            className="grid gap-6 rounded-2xl border border-border bg-background p-5 sm:p-8 shadow-sm"
           >
             {/* Appointment type */}
             <div className="grid gap-3">
-              <Label className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+              <Label className="text-[13px] font-semibold uppercase tracking-wide text-foreground">
                 {t("contact.fType")}
               </Label>
+
               <div className="grid gap-3 sm:grid-cols-3">
                 <TypeOption
                   active={values.type === "online"}
@@ -245,6 +246,7 @@ function ContactPage() {
                   label={t("contact.typeOnline")}
                   desc={t("contact.typeOnlineDesc")}
                 />
+
                 <TypeOption
                   active={values.type === "onsite"}
                   onSelect={() => set("type")("onsite")}
@@ -252,6 +254,7 @@ function ContactPage() {
                   label={t("contact.typeOnsite")}
                   desc={t("contact.typeOnsiteDesc")}
                 />
+
                 <TypeOption
                   active={values.type === "visit"}
                   onSelect={() => set("type")("visit")}
@@ -274,6 +277,7 @@ function ContactPage() {
                 onChange={(v) => set("name")(v)}
                 autoComplete="name"
               />
+
               <Field
                 id="company"
                 label={t("contact.fCompany")}
@@ -282,6 +286,7 @@ function ContactPage() {
                 onChange={(v) => set("company")(v)}
                 autoComplete="organization"
               />
+
               <Field
                 id="email"
                 type="email"
@@ -291,6 +296,7 @@ function ContactPage() {
                 onChange={(v) => set("email")(v)}
                 autoComplete="email"
               />
+
               <Field
                 id="phone"
                 type="tel"
@@ -300,12 +306,14 @@ function ContactPage() {
                 onChange={(v) => set("phone")(v)}
                 autoComplete="tel"
               />
+
               <Field
                 id="role"
                 label={t("contact.fRole")}
                 value={values.role ?? ""}
                 onChange={(v) => set("role")(v)}
               />
+
               <Field
                 id="industry"
                 label={t("contact.fIndustry")}
@@ -319,10 +327,17 @@ function ContactPage() {
 
             {/* Date + time */}
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="grid gap-1.5" data-error={errors.date ? "true" : undefined}>
-                <Label htmlFor="date" className="text-[13px] font-medium text-foreground">
+              <div
+                className="grid gap-1.5"
+                data-error={errors.date ? "true" : undefined}
+              >
+                <Label
+                  htmlFor="date"
+                  className="text-[13px] font-medium text-foreground"
+                >
                   {t("contact.fDate")}
                 </Label>
+
                 <Input
                   id="date"
                   type="date"
@@ -330,8 +345,12 @@ function ContactPage() {
                   value={values.date}
                   onChange={(e) => set("date")(e.target.value)}
                   aria-invalid={!!errors.date}
-                  className={errors.date ? "border-destructive" : ""}
+                  className={
+                    "bg-background text-foreground " +
+                    (errors.date ? "border-destructive" : "")
+                  }
                 />
+
                 {errors.date && <ErrText>{errors.date}</ErrText>}
               </div>
 
@@ -339,7 +358,8 @@ function ContactPage() {
                 <Label className="text-[13px] font-medium text-foreground">
                   {t("contact.fTime")}
                 </Label>
-                <div className="grid grid-cols-3 gap-1.5 rounded-md border border-border bg-background p-1">
+
+                <div className="grid grid-cols-3 gap-1.5 rounded-md border border-border bg-white p-1">
                   {(["morning", "afternoon", "flexible"] as const).map((slot) => (
                     <button
                       key={slot}
@@ -349,10 +369,12 @@ function ContactPage() {
                         "rounded-[5px] px-2 py-2 text-[12.5px] font-medium transition-colors " +
                         (values.time === slot
                           ? "bg-foreground text-background"
-                          : "text-muted-foreground hover:bg-muted")
+                          : "text-foreground/80 hover:bg-muted")
                       }
                     >
-                      {t(`contact.time${slot.charAt(0).toUpperCase() + slot.slice(1)}`)}
+                      {t(
+                        `contact.time${slot.charAt(0).toUpperCase() + slot.slice(1)}`
+                      )}
                     </button>
                   ))}
                 </div>
@@ -360,10 +382,17 @@ function ContactPage() {
             </div>
 
             {/* Message */}
-            <div className="grid gap-1.5" data-error={errors.message ? "true" : undefined}>
-              <Label htmlFor="message" className="text-[13px] font-medium text-foreground">
+            <div
+              className="grid gap-1.5"
+              data-error={errors.message ? "true" : undefined}
+            >
+              <Label
+                htmlFor="message"
+                className="text-[13px] font-medium text-foreground"
+              >
                 {t("contact.fMessage")}
               </Label>
+
               <Textarea
                 id="message"
                 rows={5}
@@ -371,8 +400,12 @@ function ContactPage() {
                 onChange={(e) => set("message")(e.target.value)}
                 placeholder={t("contact.fMessagePh")}
                 aria-invalid={!!errors.message}
-                className={errors.message ? "border-destructive" : ""}
+                className={
+                  "bg-background text-foreground " +
+                  (errors.message ? "border-destructive" : "")
+                }
               />
+
               {errors.message && <ErrText>{errors.message}</ErrText>}
             </div>
 
@@ -382,7 +415,7 @@ function ContactPage() {
                 "flex items-start gap-3 rounded-md border p-3 text-[13px] leading-relaxed cursor-pointer transition-colors " +
                 (errors.consent
                   ? "border-destructive bg-destructive/5"
-                  : "border-border bg-background hover:bg-muted/40")
+                  : "border-border bg-white hover:bg-muted/40")
               }
               data-error={errors.consent ? "true" : undefined}
             >
@@ -392,15 +425,25 @@ function ContactPage() {
                 checked={values.consent}
                 onChange={(e) => set("consent")(e.target.checked)}
               />
-              <span className="text-foreground/85">{t("contact.fConsent")}</span>
+
+              <span className="text-foreground">
+                {t("contact.fConsent")}
+              </span>
             </label>
+
             {errors.consent && <ErrText>{errors.consent}</ErrText>}
 
             <div className="flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
-              <p className="text-[12px] text-muted-foreground sm:mr-auto">
+              <p className="text-[12px] text-foreground/70 sm:mr-auto">
                 * {t("contact.formIntro")}
               </p>
-              <Button type="submit" size="lg" disabled={submitting} className="min-w-[200px]">
+
+              <Button
+                type="submit"
+                size="lg"
+                disabled={submitting}
+                className="min-w-[200px]"
+              >
                 {submitting ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
