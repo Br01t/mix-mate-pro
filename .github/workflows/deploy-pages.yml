@@ -36,12 +36,12 @@ jobs:
           GITHUB_PAGES: "true"
 
       - name: Add SPA fallback for GitHub Pages
-        run: cp dist/client/index.html dist/client/404.html
+        run: cp .output/public/index.html .output/public/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
+          path: .output/public
 
   deploy:
     environment:
