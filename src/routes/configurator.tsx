@@ -22,6 +22,7 @@ import { ModelGrid } from "@/components/configurator/ModelGrid";
 import { OptionalsList } from "@/components/configurator/OptionalsList";
 import { SummaryPanel } from "@/components/configurator/SummaryPanel";
 import { ComparePanel } from "@/components/configurator/ComparePanel";
+import { CompareDiffTable } from "@/components/configurator/CompareDiffTable";
 import { QuoteDialog } from "@/components/configurator/QuoteDialog";
 import { Switch } from "@/components/ui/switch";
 import { useI18n } from "@/i18n/I18nProvider";
