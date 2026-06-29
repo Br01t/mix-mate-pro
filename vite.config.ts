@@ -2,6 +2,7 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { existsSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
+const isGithubPages = process.env.GITHUB_PAGES === "true";
 const repoBase = "/mix-mate-pro/";
 
 /**
@@ -38,11 +39,14 @@ function serverEntryShim() {
 
 export default defineConfig({
   vite: {
-    base: process.env.GITHUB_PAGES === "true" ? repoBase : "/",
+    base: isGithubPages ? repoBase : "/",
     plugins: [serverEntryShim()],
   },
   tanstackStart: {
-    server: { entry: "server" },
+    server: {
+      entry: "server",
+      preset: isGithubPages ? "static" : undefined, // ← chiave
+    },
     prerender: {
       enabled: true,
       crawlLinks: false,
