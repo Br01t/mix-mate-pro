@@ -633,6 +633,13 @@ function ConfiguratorPage() {
                       onSwap={cfg.swapAB}
                       onReset={cfg.reset}
                     />
+                    <CompareDiffTable
+                      selectedA={cfg.A.optionals}
+                      selectedB={cfg.B.optionals}
+                      baseA={cfg.A.model.basePrice}
+                      baseB={cfg.B.model.basePrice}
+                      modelANameDiffers={cfg.A.model.id !== cfg.B.model.id}
+                    />
                     <div className="rounded-xl border border-dashed border-border bg-muted/30 p-5 text-center text-sm">
                       <p className="text-muted-foreground">
                         {lang === "it"
