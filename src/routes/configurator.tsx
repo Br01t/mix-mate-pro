@@ -141,7 +141,7 @@ function ConfiguratorPage() {
           className="absolute inset-0 h-full w-full object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/60" />
-        <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(60%_50%_at_80%_30%,oklch(0.66_0.13_195/.55),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-25 [background:radial-gradient(55%_45%_at_82%_28%,oklch(0.66_0.13_195/.4),transparent_65%)]" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
