@@ -45,6 +45,11 @@ export function Footer() {
             <li>{t("footer.careers")}</li>
             <li>{t("footer.press")}</li>
             <li>{t("footer.certifications")}</li>
+            <li>
+              <Link to="/contact" className="hover:text-surface-foreground">
+                {t("nav.contact")}
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -59,6 +64,14 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-2">
               <Mail className="mt-0.5 h-4 w-4" /> sales@mixcore.industrial
+            </li>
+            <li className="pt-2">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+              >
+                {t("nav.contact")} →
+              </Link>
             </li>
           </ul>
         </div>
