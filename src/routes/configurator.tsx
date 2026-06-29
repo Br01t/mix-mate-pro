@@ -276,6 +276,17 @@ function ConfiguratorPage() {
               })}
             </div>
           </div>
+
+          {/* Real-time per-optional diff table */}
+          <div className="mt-3">
+            <CompareDiffTable
+              selectedA={cfg.A.optionals}
+              selectedB={cfg.B.optionals}
+              baseA={cfg.A.model.basePrice}
+              baseB={cfg.B.model.basePrice}
+              modelANameDiffers={cfg.A.model.id !== cfg.B.model.id}
+            />
+          </div>
         </section>
       )}
 
