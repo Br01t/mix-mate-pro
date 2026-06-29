@@ -22,6 +22,7 @@ import { ModelGrid } from "@/components/configurator/ModelGrid";
 import { OptionalsList } from "@/components/configurator/OptionalsList";
 import { SummaryPanel } from "@/components/configurator/SummaryPanel";
 import { ComparePanel } from "@/components/configurator/ComparePanel";
+import { CompareDiffTable } from "@/components/configurator/CompareDiffTable";
 import { QuoteDialog } from "@/components/configurator/QuoteDialog";
 import { Switch } from "@/components/ui/switch";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -140,7 +141,7 @@ function ConfiguratorPage() {
           className="absolute inset-0 h-full w-full object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/60" />
-        <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(60%_50%_at_80%_30%,oklch(0.66_0.13_195/.55),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-25 [background:radial-gradient(55%_45%_at_82%_28%,oklch(0.66_0.13_195/.4),transparent_65%)]" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -274,6 +275,17 @@ function ConfiguratorPage() {
                 );
               })}
             </div>
+          </div>
+
+          {/* Real-time per-optional diff table */}
+          <div className="mt-3">
+            <CompareDiffTable
+              selectedA={cfg.A.optionals}
+              selectedB={cfg.B.optionals}
+              baseA={cfg.A.model.basePrice}
+              baseB={cfg.B.model.basePrice}
+              modelANameDiffers={cfg.A.model.id !== cfg.B.model.id}
+            />
           </div>
         </section>
       )}
@@ -620,6 +632,13 @@ function ConfiguratorPage() {
                       onDuplicate={cfg.duplicateAB}
                       onSwap={cfg.swapAB}
                       onReset={cfg.reset}
+                    />
+                    <CompareDiffTable
+                      selectedA={cfg.A.optionals}
+                      selectedB={cfg.B.optionals}
+                      baseA={cfg.A.model.basePrice}
+                      baseB={cfg.B.model.basePrice}
+                      modelANameDiffers={cfg.A.model.id !== cfg.B.model.id}
                     />
                     <div className="rounded-xl border border-dashed border-border bg-muted/30 p-5 text-center text-sm">
                       <p className="text-muted-foreground">
