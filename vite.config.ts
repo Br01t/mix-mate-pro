@@ -44,9 +44,10 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
     prerender: {
-      enabled: process.env.GITHUB_PAGES !== "true",  // ← disabilita in CI
-      crawlLinks: true,
-      autoStaticPathsDiscovery: true,
+      enabled: true,
+      crawlLinks: false,
+      routes: ["/"],
+      autoStaticPathsDiscovery: false,
       failOnError: true,
     },
   },
