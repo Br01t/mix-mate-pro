@@ -14,7 +14,7 @@ type Props = {
 };
 
 export function StepReview({ cfg, onOpenQuote }: Props) {
-  const { lang, pick, t } = useI18n();
+  const { lang, t } = useI18n();
 
   return (
     <div className="animate-in fade-in space-y-8 duration-300">
