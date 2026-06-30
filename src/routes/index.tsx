@@ -242,11 +242,19 @@ function HomePage() {
   );
 }
 
-function Stat({ n, label }: { n: string; label: string }) {
+function Stat({ n, label, idx }: { n: string; label: string; idx?: string }) {
   return (
     <div>
-      <dt className="text-2xl font-semibold text-surface-foreground md:text-3xl">{n}</dt>
-      <dd className="mt-1 text-xs uppercase tracking-wider text-surface-foreground/60">{label}</dd>
+      {idx && (
+        <span className="eyebrow block text-surface-foreground/40">{idx}</span>
+      )}
+      <dt className="mt-1 font-display tech-num text-2xl font-semibold text-surface-foreground md:text-3xl">
+        {n}
+      </dt>
+      <dd className="mt-1 text-[11px] uppercase tracking-[0.18em] text-surface-foreground/60">
+        {label}
+      </dd>
     </div>
   );
 }
+
