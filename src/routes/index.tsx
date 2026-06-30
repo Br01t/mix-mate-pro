@@ -62,22 +62,25 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-surface text-surface-foreground">
-        <div className="pointer-events-none absolute inset-0 opacity-30 [background:radial-gradient(60%_50%_at_70%_30%,oklch(0.66_0.13_195/.45),transparent_60%),radial-gradient(50%_40%_at_20%_80%,oklch(0.7_0.13_230/.35),transparent_60%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-12 sm:py-16 lg:grid-cols-2 lg:px-8 lg:py-28">
+      <section className="relative overflow-hidden bg-surface text-surface-foreground grain">
+        <div className="pointer-events-none absolute inset-0 blueprint-grid-dark opacity-40" />
+        <div className="pointer-events-none absolute inset-0 [background:radial-gradient(45%_55%_at_78%_28%,oklch(0.68_0.16_42/.35),transparent_60%),radial-gradient(40%_45%_at_8%_92%,oklch(0.58_0.135_38/.22),transparent_65%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-surface-foreground/15" />
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-12 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-8 lg:py-28">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-surface-foreground/15 bg-surface-foreground/5 px-3 py-1 text-xs font-medium text-surface-foreground/80">
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
-              {t("home.badge")}
-            </span>
-            <h1 className="mt-5 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
+            <div className="flex items-center gap-3 eyebrow text-surface-foreground/65">
+              <span className="tech-num text-primary">EP3 482 109</span>
+              <span className="h-px w-8 bg-surface-foreground/25" />
+              <span>{t("home.badge")}</span>
+            </div>
+            <h1 className="mt-6 font-display text-[2.5rem] font-semibold leading-[1.02] tracking-tight md:text-[4.25rem]">
               {t("home.h1a")}
               <br />
-              <span className="text-primary">{t("home.h1b")}</span>
+              <span className="italic font-normal text-primary">{t("home.h1b")}</span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-surface-foreground/75">{t("home.intro")}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-surface-foreground/75">{t("home.intro")}</p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button asChild size="lg" className="h-12 rounded-md px-6 text-[14px]">
                 <Link to="/configurator">
                   {t("common.configureMixer")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -86,21 +89,26 @@ function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-surface-foreground/20 bg-transparent text-surface-foreground hover:bg-surface-foreground/10 hover:text-surface-foreground"
+                className="h-12 rounded-md border-surface-foreground/25 bg-transparent px-6 text-[14px] text-surface-foreground hover:bg-surface-foreground/10 hover:text-surface-foreground"
               >
                 <Link to="/technology">{t("common.seeTechnology")}</Link>
               </Button>
             </div>
 
-            <dl className="mt-12 grid grid-cols-3 gap-3 sm:gap-6 border-t border-surface-foreground/10 pt-8">
-              <Stat n="1.200+" label={t("home.statDeployed")} />
-              <Stat n="42" label={t("home.statCountries")} />
-              <Stat n={t("home.statEngVal")} label={t("home.statEng")} />
+            <dl className="mt-14 grid grid-cols-3 gap-3 sm:gap-6 border-t border-surface-foreground/15 pt-8">
+              <Stat n="1.200+" label={t("home.statDeployed")} idx="01" />
+              <Stat n="42" label={t("home.statCountries")} idx="02" />
+              <Stat n={t("home.statEngVal")} label={t("home.statEng")} idx="03" />
             </dl>
           </div>
 
           <div className="relative">
-            <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border border-surface-foreground/10 bg-gradient-to-br from-surface-foreground/5 to-transparent">
+            <div className="absolute -top-3 left-0 flex items-center gap-2 eyebrow text-surface-foreground/55">
+              <span className="tech-num">FIG.01</span>
+              <span className="h-px w-10 bg-surface-foreground/25" />
+              <span>Twin-Rotor Core</span>
+            </div>
+            <div className="tick-frame relative mx-auto aspect-square w-full max-w-md overflow-hidden border border-surface-foreground/15 bg-gradient-to-br from-surface-foreground/5 to-transparent">
               <img
                 src={heroMixer}
                 alt="Mixer industriale MixCore"
@@ -108,16 +116,21 @@ function HomePage() {
                 height={1024}
                 className="h-full w-full object-cover"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-surface/60 via-transparent to-primary/10" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-surface/70 via-transparent to-primary/15 mix-blend-multiply" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between p-4 text-[11px] eyebrow text-surface-foreground/70">
+                <span>MX-Σ / 2026</span>
+                <span className="tech-num">Ø 2400 mm</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+
       {/* BENEFITS */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-12 max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="eyebrow text-primary">
             {t("home.whyKicker")}
           </p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -146,7 +159,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+              <p className="eyebrow text-primary">
                 {t("home.howKicker")}
               </p>
               <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -174,7 +187,7 @@ function HomePage() {
       {/* ABOUT */}
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="eyebrow text-primary">
             {t("home.aboutKicker")}
           </p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -211,7 +224,7 @@ function HomePage() {
       {/* TRUSTED BY */}
       <section className="border-y border-border bg-muted/40">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-4 py-10 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="eyebrow text-muted-foreground">
             {t("home.trustedBy")}
           </p>
           <div className="flex flex-wrap items-center gap-x-10 gap-y-3 opacity-70">
@@ -229,11 +242,19 @@ function HomePage() {
   );
 }
 
-function Stat({ n, label }: { n: string; label: string }) {
+function Stat({ n, label, idx }: { n: string; label: string; idx?: string }) {
   return (
     <div>
-      <dt className="text-2xl font-semibold text-surface-foreground md:text-3xl">{n}</dt>
-      <dd className="mt-1 text-xs uppercase tracking-wider text-surface-foreground/60">{label}</dd>
+      {idx && (
+        <span className="eyebrow block text-surface-foreground/40">{idx}</span>
+      )}
+      <dt className="mt-1 font-display tech-num text-2xl font-semibold text-surface-foreground md:text-3xl">
+        {n}
+      </dt>
+      <dd className="mt-1 text-[11px] uppercase tracking-[0.18em] text-surface-foreground/60">
+        {label}
+      </dd>
     </div>
   );
 }
+
