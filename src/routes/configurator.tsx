@@ -146,7 +146,7 @@ function ConfiguratorPage() {
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8 lg:py-28">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
+              <p className="flex items-center gap-2 eyebrow text-primary">
                 <Layers className="h-4 w-4" />
                 {t("cfg.kicker")}
               </p>

@@ -130,7 +130,7 @@ function HomePage() {
       {/* BENEFITS */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-12 max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="eyebrow text-primary">
             {t("home.whyKicker")}
           </p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -159,7 +159,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+              <p className="eyebrow text-primary">
                 {t("home.howKicker")}
               </p>
               <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -187,7 +187,7 @@ function HomePage() {
       {/* ABOUT */}
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="eyebrow text-primary">
             {t("home.aboutKicker")}
           </p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -224,7 +224,7 @@ function HomePage() {
       {/* TRUSTED BY */}
       <section className="border-y border-border bg-muted/40">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-4 py-10 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="eyebrow text-muted-foreground">
             {t("home.trustedBy")}
           </p>
           <div className="flex flex-wrap items-center gap-x-10 gap-y-3 opacity-70">

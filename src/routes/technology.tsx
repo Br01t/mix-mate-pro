@@ -76,7 +76,7 @@ function TechnologyPage() {
     <>
       <section className="bg-surface text-surface-foreground">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="eyebrow text-primary">
             {t("tech.kicker")}
           </p>
           <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
@@ -87,7 +87,7 @@ function TechnologyPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+        <p className="eyebrow text-primary">
           {t("tech.howKicker")}
         </p>
         <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -112,7 +112,7 @@ function TechnologyPage() {
       <section className="bg-muted/40">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+            <p className="eyebrow text-primary">
               {t("tech.specsKicker")}
             </p>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -161,7 +161,7 @@ function TechnologyPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+        <p className="eyebrow text-primary">
           {t("tech.casesKicker")}
         </p>
         <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
