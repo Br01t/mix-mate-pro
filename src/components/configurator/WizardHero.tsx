@@ -39,31 +39,33 @@ export function WizardHero({ compare, onToggleCompare, showCompareToggle = true 
             </p>
           </div>
 
-          <label
-            htmlFor="compare-toggle"
-            className={cn(
-              "flex shrink-0 cursor-pointer items-center gap-2 rounded-md border px-3 py-2 backdrop-blur transition-all sm:gap-3 sm:px-4 sm:py-2.5",
-              compare
-                ? "border-primary/60 bg-primary/10"
-                : "border-surface-foreground/15 bg-surface-foreground/5 hover:border-surface-foreground/30",
-            )}
-          >
-            <div
+          {showCompareToggle && (
+            <label
+              htmlFor="compare-toggle"
               className={cn(
-                "grid h-8 w-8 shrink-0 place-items-center rounded-md transition-colors sm:h-9 sm:w-9",
+                "flex shrink-0 cursor-pointer items-center gap-2 rounded-md border px-3 py-2 backdrop-blur transition-all sm:gap-3 sm:px-4 sm:py-2.5",
                 compare
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-surface-foreground/10 text-surface-foreground/70",
+                  ? "border-primary/60 bg-primary/10"
+                  : "border-surface-foreground/15 bg-surface-foreground/5 hover:border-surface-foreground/30",
               )}
             >
-              <GitCompare className="h-4 w-4" />
-            </div>
-            <div className="hidden min-w-0 sm:block">
-              <p className="text-sm font-semibold">{t("cfg.compareMode")}</p>
-              <p className="text-[11px] text-surface-foreground/65">{t("cfg.compareHint")}</p>
-            </div>
-            <Switch id="compare-toggle" checked={compare} onCheckedChange={onToggleCompare} />
-          </label>
+              <div
+                className={cn(
+                  "grid h-8 w-8 shrink-0 place-items-center rounded-md transition-colors sm:h-9 sm:w-9",
+                  compare
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-surface-foreground/10 text-surface-foreground/70",
+                )}
+              >
+                <GitCompare className="h-4 w-4" />
+              </div>
+              <div className="hidden min-w-0 sm:block">
+                <p className="text-sm font-semibold">{t("cfg.compareMode")}</p>
+                <p className="text-[11px] text-surface-foreground/65">{t("cfg.compareHint")}</p>
+              </div>
+              <Switch id="compare-toggle" checked={compare} onCheckedChange={onToggleCompare} />
+            </label>
+          )}
         </div>
       </div>
     </section>
