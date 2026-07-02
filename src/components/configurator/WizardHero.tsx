@@ -7,6 +7,7 @@ import heroBg from "@/assets/mixer-flagship.jpg";
 type Props = {
   compare: boolean;
   onToggleCompare: () => void;
+  showCompareToggle?: boolean;
 };
 
 export function WizardHero({ compare, onToggleCompare }: Props) {
