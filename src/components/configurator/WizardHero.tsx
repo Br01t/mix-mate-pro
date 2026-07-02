@@ -25,7 +25,7 @@ export function WizardHero({ compare, onToggleCompare, showCompareToggle = true 
       <div className="pointer-events-none absolute inset-0 [background:radial-gradient(45%_55%_at_82%_28%,oklch(0.68_0.16_42/.35),transparent_65%)]" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:gap-6">
+        <div className={cn("grid items-end gap-4 sm:gap-6", showCompareToggle ? "grid-cols-[minmax(0,1fr)_auto]" : "grid-cols-1")}>
           <div className="min-w-0 max-w-2xl">
             <p className="flex items-center gap-2 eyebrow text-primary">
               <Layers className="h-4 w-4 shrink-0" />
