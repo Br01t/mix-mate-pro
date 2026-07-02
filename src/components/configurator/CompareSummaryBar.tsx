@@ -17,26 +17,21 @@ type Props = {
   onDuplicate: () => void;
   onSwap: () => void;
   onDisable?: () => void;
-  /** Top offset in px; matches the sticky <header /> height (68px). */
-  topOffset?: number;
 };
 
 /**
- * Sticky, always-visible A/B live summary used in compare mode.
- * Designed to coexist with the sticky header (top offset) and with the
- * mobile bottom action bar (no overlap because it sits at top).
+ * A/B live summary shown in compare mode. Meant to be embedded inside the
+ * sticky wizard-nav container (parent controls stickiness), so no positioning
+ * is applied here.
  */
-export function CompareSummaryBar({ A, B, onDuplicate, onSwap, onDisable, topOffset = 68 }: Props) {
+export function CompareSummaryBar({ A, B, onDuplicate, onSwap, onDisable }: Props) {
   const { lang } = useI18n();
   const delta = B.total - A.total;
 
   return (
-    <div
-      className="sticky z-30 border-y border-border bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70"
-      style={{ top: topOffset }}
-    >
-      <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:gap-4">
+    <div className="border-t border-border/70 bg-background/60">
+      <div className="mx-auto max-w-7xl px-3 py-2 sm:px-6 sm:py-2.5 lg:px-8">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:gap-4">
           <div className="grid min-w-0 grid-cols-2 gap-2 sm:gap-3">
             <SlotPill slot="A" data={A} />
             <SlotPill slot="B" data={B} delta={delta} />
