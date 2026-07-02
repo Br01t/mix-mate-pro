@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, GitCompare, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/i18n/I18nProvider";
+import { CompareToggleInline } from "../CompareToggleInline";
 import { ModelGrid } from "../ModelGrid";
 import type { useConfigurator } from "../useConfigurator";
 
