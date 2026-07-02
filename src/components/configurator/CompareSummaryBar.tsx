@@ -60,6 +60,17 @@ export function CompareSummaryBar({ A, B, onDuplicate, onSwap, onDisable, topOff
               <ArrowLeftRight className="h-3 w-3" />
               <span className="hidden sm:inline">A ⇄ B</span>
             </button>
+            {onDisable && (
+              <button
+                type="button"
+                onClick={onDisable}
+                title={lang === "it" ? "Esci dal confronto" : "Exit compare"}
+                className="inline-flex items-center gap-1 rounded-md border border-destructive/40 bg-destructive/5 px-2 py-1.5 text-[11px] font-semibold text-destructive transition-colors hover:bg-destructive/10"
+              >
+                <X className="h-3 w-3" />
+                <span className="hidden sm:inline">{lang === "it" ? "Esci" : "Exit"}</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
