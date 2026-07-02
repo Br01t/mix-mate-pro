@@ -5,6 +5,7 @@ import { formatEUR } from "@/lib/format";
 import { downloadGuestQuote } from "@/lib/quote";
 import { ComparePanel } from "../ComparePanel";
 import { CompareDiffTable } from "../CompareDiffTable";
+import { CompareToggleInline } from "../CompareToggleInline";
 import { SummaryPanel } from "../SummaryPanel";
 import type { useConfigurator, SlotId } from "../useConfigurator";
 
