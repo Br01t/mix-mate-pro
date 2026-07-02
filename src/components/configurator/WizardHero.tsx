@@ -10,7 +10,7 @@ type Props = {
   showCompareToggle?: boolean;
 };
 
-export function WizardHero({ compare, onToggleCompare }: Props) {
+export function WizardHero({ compare, onToggleCompare, showCompareToggle = true }: Props) {
   const { t } = useI18n();
   return (
     <section className="relative overflow-hidden border-b border-border bg-surface text-surface-foreground grain">
