@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Settings } from "lucide-react";
+import { ChevronLeft, ChevronRight, GitCompare, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/i18n/I18nProvider";
 import { ModelGrid } from "../ModelGrid";
@@ -43,6 +43,39 @@ export function StepModel({ cfg }: Props) {
         onSelectFor={cfg.compare ? cfg.setModelIdFor : undefined}
         recommendedIds={cfg.recommendedModelIds}
       />
+
+      {!cfg.compare && (
+        <div className="relative overflow-hidden rounded-lg border-2 border-dashed border-primary/40 bg-primary/5 p-4 sm:p-5">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <div className="flex items-start gap-3">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground">
+                <GitCompare className="h-5 w-5" />
+              </div>
+              <div className="min-w-0">
+                <p className="font-semibold text-foreground">
+                  {lang === "it"
+                    ? `Hai scelto ${cfg.model.name}. Vuoi confrontarlo?`
+                    : `You picked ${cfg.model.name}. Want to compare it?`}
+                </p>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  {lang === "it"
+                    ? "Attiva la modalità confronto per valutare due configurazioni fianco a fianco."
+                    : "Enable compare mode to evaluate two configurations side by side."}
+                </p>
+              </div>
+            </div>
+            <Button
+              onClick={cfg.enableCompare}
+              size="lg"
+              className="w-full shrink-0 gap-2 font-semibold sm:w-auto"
+            >
+              <GitCompare className="h-4 w-4" />
+              {lang === "it" ? "Attiva confronto" : "Enable compare"}
+            </Button>
+          </div>
+        </div>
+      )}
+
 
       <div className="flex justify-between border-t border-border pt-6">
         <Button variant="outline" onClick={cfg.prevStep} size="lg" className="gap-2">
