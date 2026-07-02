@@ -57,7 +57,7 @@ function ConfiguratorPage() {
 
   return (
     <div className="pb-28 lg:pb-12">
-      <WizardHero compare={cfg.compare} onToggleCompare={cfg.toggleCompare} />
+      <WizardHero compare={cfg.compare} onToggleCompare={cfg.toggleCompare} showCompareToggle={cfg.step >= 2} />
 
       {showCompareBar && (
         <CompareSummaryBar
