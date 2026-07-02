@@ -1,4 +1,4 @@
-import { ArrowLeftRight, Copy } from "lucide-react";
+import { ArrowLeftRight, Copy, X } from "lucide-react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { cn } from "@/lib/utils";
 import { formatEUR } from "@/lib/format";
