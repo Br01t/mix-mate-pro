@@ -18,7 +18,7 @@ export function WizardStepper({ steps, current, onJump }: Props) {
   const active = steps[current - 1];
 
   return (
-    <div className="rounded-xl border border-border bg-card p-3 shadow-sm sm:p-4">
+    <div className="rounded-lg">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 md:flex md:flex-row md:justify-between">
         <div className="flex min-w-0 items-center gap-2.5">
           <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-primary/10 text-xs font-bold text-primary tech-num">
