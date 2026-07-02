@@ -59,21 +59,20 @@ function ConfiguratorPage() {
     <div className="pb-28 lg:pb-12">
       <WizardHero />
 
-      {showCompareBar && (
-        <CompareSummaryBar
-          A={cfg.A}
-          B={cfg.B}
-          onDuplicate={cfg.duplicateAB}
-          onSwap={cfg.swapAB}
-          onDisable={cfg.disableCompare}
-        />
-      )}
-
-      <section className="sticky top-[68px] z-20 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
+      <div className="sticky top-[68px] z-30 border-b border-border/70 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
+        <div className="mx-auto max-w-7xl px-3 pt-3 pb-3 sm:px-6 lg:px-8">
           <WizardStepper steps={STEPS} current={cfg.step} onJump={cfg.setStep} />
         </div>
-      </section>
+        {showCompareBar && (
+          <CompareSummaryBar
+            A={cfg.A}
+            B={cfg.B}
+            onDuplicate={cfg.duplicateAB}
+            onSwap={cfg.swapAB}
+            onDisable={cfg.disableCompare}
+          />
+        )}
+      </div>
 
       <section className="mx-auto max-w-7xl px-4 pb-6 sm:px-6 lg:px-8">
         <div
