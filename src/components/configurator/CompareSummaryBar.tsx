@@ -16,6 +16,7 @@ type Props = {
   B: SlotData;
   onDuplicate: () => void;
   onSwap: () => void;
+  onDisable?: () => void;
   /** Top offset in px; matches the sticky <header /> height (68px). */
   topOffset?: number;
 };
@@ -25,7 +26,7 @@ type Props = {
  * Designed to coexist with the sticky header (top offset) and with the
  * mobile bottom action bar (no overlap because it sits at top).
  */
-export function CompareSummaryBar({ A, B, onDuplicate, onSwap, topOffset = 68 }: Props) {
+export function CompareSummaryBar({ A, B, onDuplicate, onSwap, onDisable, topOffset = 68 }: Props) {
   const { lang } = useI18n();
   const delta = B.total - A.total;
 
