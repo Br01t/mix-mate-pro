@@ -5,6 +5,7 @@ import { formatEUR } from "@/lib/format";
 import { downloadGuestQuote } from "@/lib/quote";
 import { ComparePanel } from "../ComparePanel";
 import { CompareDiffTable } from "../CompareDiffTable";
+import { CompareToggleInline } from "../CompareToggleInline";
 import { SummaryPanel } from "../SummaryPanel";
 import type { useConfigurator, SlotId } from "../useConfigurator";
 
@@ -18,19 +19,20 @@ export function StepReview({ cfg, onOpenQuote }: Props) {
 
   return (
     <div className="animate-in fade-in space-y-8 duration-300">
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
-        <div>
-          <h2 className="text-xl font-semibold text-foreground">
+      <header className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 border-b border-border pb-4 sm:gap-4">
+        <div className="min-w-0">
+          <h2 className="text-lg font-semibold text-foreground sm:text-xl">
             {lang === "it"
               ? "4. Riepilogo & Preventivo Ufficiale"
               : "4. Technical Review & Official Quote"}
           </h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
             {lang === "it"
               ? "Verifica le specifiche configurate, scarica il datasheet PDF o invia la richiesta ufficiale."
               : "Verify your configured specifications, export the PDF datasheet or request an official quote."}
           </p>
         </div>
+        <CompareToggleInline compare={cfg.compare} onToggle={cfg.toggleCompare} />
       </header>
 
       {cfg.compare ? (
