@@ -34,6 +34,9 @@ export const Route = createFileRoute("/")({
           "Mixer industriali twin-rotor brevettati per precisione, sicurezza e continuità operativa.",
       },
     ],
+    links: [
+      { rel: "preload", as: "image", href: heroMixer, fetchpriority: "high" },
+    ],
   }),
   component: HomePage,
 });
