@@ -131,6 +131,8 @@ function SingleReview({ cfg, onOpenQuote }: Props) {
               <img
                 src={cfg.model.image}
                 alt={cfg.model.name}
+                loading="lazy"
+                decoding="async"
                 className="h-16 w-16 shrink-0 rounded-lg border border-border object-cover"
               />
               <div className="min-w-0 flex-1">

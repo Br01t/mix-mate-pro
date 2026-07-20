@@ -171,6 +171,7 @@ function SlotCard({
           src={slot.model.image}
           alt={slot.model.name}
           loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 hover:scale-105 animate-in fade-in zoom-in-95"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
