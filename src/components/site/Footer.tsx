@@ -6,7 +6,7 @@ export function Footer() {
   const { t } = useI18n();
   return (
     <footer className="bg-surface text-surface-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 sm:py-14 md:grid-cols-4 lg:px-8">
         <div className="md:col-span-1">
           <div className="flex items-center gap-2 font-semibold">
             <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
