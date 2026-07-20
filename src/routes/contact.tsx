@@ -159,15 +159,15 @@ function ContactPage() {
             }}
           />
         </div>
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:py-20 lg:px-8">
-          <div>
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:gap-10 sm:px-6 sm:py-16 md:grid-cols-[1.1fr_0.9fr] md:py-20 lg:px-8">
+          <div className="min-w-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
               {t("contact.kicker")}
             </p>
-            <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+            <h1 className="mt-3 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl break-words">
               {t("contact.title")}
             </h1>
-            <p className="mt-5 max-w-2xl text-lg text-surface-foreground/75">
+            <p className="mt-5 max-w-2xl text-base sm:text-lg text-surface-foreground/75">
               {t("contact.intro")}
             </p>
             <div className="mt-8 flex flex-wrap gap-2 text-[12px] font-medium">
@@ -214,17 +214,17 @@ function ContactPage() {
 
       {/* Form */}
       <section className="bg-background">
-        <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 md:py-20 lg:px-8">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-14 md:py-20 lg:px-8">
+          <div className="mb-6 sm:mb-8 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
+            <div className="min-w-0">
+              <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl md:text-3xl">
                 {t("contact.formTitle")}
               </h2>
-              <p className="mt-2 text-[14.5px] text-muted-foreground">
+              <p className="mt-2 text-sm sm:text-[14.5px] text-muted-foreground">
                 {t("contact.formIntro")}
               </p>
             </div>
-            <CalendarClock className="hidden h-9 w-9 text-muted-foreground sm:block" />
+            <CalendarClock className="hidden h-9 w-9 text-muted-foreground sm:block shrink-0" />
           </div>
 
           <form
@@ -359,14 +359,14 @@ function ContactPage() {
                   {t("contact.fTime")}
                 </Label>
 
-                <div className="grid grid-cols-3 gap-1.5 rounded-md border border-border bg-white p-1">
+                <div className="grid grid-cols-3 gap-1 sm:gap-1.5 rounded-md border border-border bg-white p-1">
                   {(["morning", "afternoon", "flexible"] as const).map((slot) => (
                     <button
                       key={slot}
                       type="button"
                       onClick={() => set("time")(slot)}
                       className={
-                        "rounded-[5px] px-2 py-2 text-[12.5px] font-medium transition-colors " +
+                        "rounded-[5px] px-1.5 sm:px-2 py-2 text-[11.5px] sm:text-[12.5px] font-medium transition-colors truncate " +
                         (values.time === slot
                           ? "bg-foreground text-background"
                           : "text-foreground/80 hover:bg-muted")
@@ -442,7 +442,7 @@ function ContactPage() {
                 type="submit"
                 size="lg"
                 disabled={submitting}
-                className="min-w-[200px]"
+                className="w-full sm:w-auto sm:min-w-[200px]"
               >
                 {submitting ? (
                   <>

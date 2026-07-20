@@ -75,25 +75,25 @@ function TechnologyPage() {
   return (
     <>
       <section className="bg-surface text-surface-foreground">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
           <p className="eyebrow text-primary">
             {t("tech.kicker")}
           </p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+          <h1 className="mt-3 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl break-words">
             {t("tech.h1")}
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-surface-foreground/75">{t("tech.intro")}</p>
+          <p className="mt-5 max-w-2xl text-base sm:text-lg text-surface-foreground/75">{t("tech.intro")}</p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <p className="eyebrow text-primary">
           {t("tech.howKicker")}
         </p>
-        <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
           {t("tech.howTitle")}
         </h2>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 sm:mt-10 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {process.map((p, idx) => (
             <div key={p.title} className="relative rounded-xl border border-border bg-card p-6">
               <span className="absolute right-4 top-4 text-xs font-mono text-muted-foreground">
@@ -110,12 +110,12 @@ function TechnologyPage() {
       </section>
 
       <section className="bg-muted/40">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8">
-          <div>
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:gap-10 sm:px-6 sm:py-20 md:grid-cols-2 lg:px-8">
+          <div className="min-w-0">
             <p className="eyebrow text-primary">
               {t("tech.specsKicker")}
             </p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
               {t("tech.specsTitle")}
             </h2>
             <p className="mt-3 text-muted-foreground">{t("tech.specsIntro")}</p>
@@ -160,14 +160,14 @@ function TechnologyPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <p className="eyebrow text-primary">
           {t("tech.casesKicker")}
         </p>
-        <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
           {t("tech.casesTitle")}
         </h2>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 sm:mt-10 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((i) => (
             <div
               key={i.name}
