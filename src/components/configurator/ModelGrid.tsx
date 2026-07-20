@@ -309,6 +309,7 @@ export function ModelGrid({
                   src={m.image}
                   alt={m.name}
                   loading="lazy"
+                  decoding="async"
                   className={cn(
                     "h-full w-full object-cover transition-all duration-700",
                     active ? "scale-105" : "scale-100 group-hover:scale-110",
@@ -470,6 +471,8 @@ export function ModelGrid({
                   <img
                     src={selectedDetailsModel.image}
                     alt={selectedDetailsModel.name}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover aspect-[4/3]"
                   />
                 </div>

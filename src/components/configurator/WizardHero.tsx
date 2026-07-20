@@ -10,6 +10,8 @@ export function WizardHero() {
         src={heroBg}
         alt=""
         aria-hidden
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover opacity-50"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/60" />

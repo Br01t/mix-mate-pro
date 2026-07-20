@@ -34,6 +34,8 @@ export function SummaryPanel({
             key={model.id}
             src={model.image}
             alt={model.name}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover animate-in fade-in zoom-in-95 duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent" />

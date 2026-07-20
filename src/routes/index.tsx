@@ -34,6 +34,9 @@ export const Route = createFileRoute("/")({
           "Mixer industriali twin-rotor brevettati per precisione, sicurezza e continuità operativa.",
       },
     ],
+    links: [
+      { rel: "preload", as: "image", href: heroMixer, fetchpriority: "high" },
+    ],
   }),
   component: HomePage,
 });
@@ -114,6 +117,8 @@ function HomePage() {
                 alt="Mixer industriale MixCore"
                 width={1024}
                 height={1024}
+                fetchPriority="high"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-surface/70 via-transparent to-primary/15 mix-blend-multiply" />
